@@ -34,13 +34,16 @@ Pregunta (lenguaje natural)
 ├── src/network_opt/
 │   ├── data.py                 # NetworkData: carga y validación
 │   ├── model.py                # MILP en gurobipy (variables, objetivo, restricciones)
-│   └── scenario.py             # Operaciones what-if (futuras herramientas del LLM)
+│   └── scenario.py             # Operaciones what-if (lista blanca)
+├── src/whatif_agent/
+│   ├── tools.py                # Herramientas para Claude (enums desde los datos, strict)
+│   └── translator.py           # Pregunta en lenguaje natural -> operaciones JSON
 ├── tests/                      # pytest
 └── docs/                       # Notas de diseño y formulación
 ```
 
-Fases siguientes: `src/agent/` (traductor LLM y redactor de reportes) y
-`src/network_opt/loaders/` (dataset DataCo Smart Supply Chain).
+Fases siguientes: redactor del reporte ejecutivo y cargador del dataset
+DataCo Smart Supply Chain.
 
 ## Formulación
 
@@ -59,9 +62,23 @@ severo no termina en "INFEASIBLE": el modelo entrega cuántas unidades faltan y 
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python main.py
-pytest
+python main.py                 # escenario de ejemplo, sin LLM
+pytest                         # los tests usan un cliente falso: no gastan créditos
 ```
+
+### Preguntas en lenguaje natural
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+python main.py --pregunta "¿Qué pasa si cerramos el CD de La Serena y el diésel sube 15%?"
+```
+
+El traductor usa Claude con *tool use*. Cada operación es una herramienta con `strict: true`,
+y los nombres de plantas, CDs, clientes y regiones van como `enum` sacados de los datos, así
+que el modelo no puede inventar nodos que no existen. Si una llamada no pasa la validación,
+el error vuelve a Claude para que la corrija. El resultado final es un JSON auditable con las
+operaciones, la interpretación, los supuestos y lo que no se pudo expresar. Ese JSON se puede
+volver a ejecutar sin llamar al LLM.
 
 El paquete `gurobipy` de pip trae una licencia restringida (2000 variables y restricciones),
 suficiente para el caso de ejemplo. Para redes grandes, instala tu licencia académica:

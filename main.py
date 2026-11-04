@@ -1,13 +1,16 @@
 """Punto de entrada: resuelve el caso base y un escenario what-if de ejemplo.
 
 Uso:
-    python main.py                 # caso base + escenario de ejemplo
-    python main.py --verbose       # muestra el log de Gurobi
+    python main.py                           # caso base + escenario de ejemplo (sin LLM)
+    python main.py --pregunta "..."          # traduce la pregunta con Claude (requiere ANTHROPIC_API_KEY)
+    python main.py --verbose                 # muestra el log de Gurobi
 """
 
 from __future__ import annotations
 
 import argparse
+import json
+import os
 import sys
 from pathlib import Path
 
@@ -18,11 +21,9 @@ from network_opt.scenario import apply_operations  # noqa: E402
 
 BASE_DATA = Path(__file__).parent / "data" / "base_network.json"
 
-# ======================================================================
-# FUTURO: esta lista la producira el LLM a partir de la pregunta:
+# Escenario fijo para correr sin LLM. Es lo que el traductor produce para:
 #   "Que pasa con el costo de transporte si la fabrica de Santiago reduce
 #    su capacidad a la mitad y la demanda en el norte aumenta un 20%?"
-# ======================================================================
 EXAMPLE_SCENARIO = [
     {"op": "scale_factory_capacity", "factory": "Planta Santiago", "factor": 0.5},
     {"op": "scale_demand", "factor": 1.2, "region": "norte"},
@@ -65,15 +66,28 @@ def print_delta(base: SolveResult, scen: SolveResult) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verbose", action="store_true", help="Mostrar log de Gurobi")
+    parser.add_argument("--pregunta", help="Pregunta what-if en lenguaje natural (usa Claude)")
     args = parser.parse_args()
 
     base_data = load_network(BASE_DATA)
     base = solve(base_data, verbose=args.verbose)
     print_result("Caso base", base)
 
-    scen_data = apply_operations(base_data, EXAMPLE_SCENARIO)
-    scen = solve(scen_data, verbose=args.verbose)
-    print_result("Escenario: Planta Santiago al 50% + demanda norte +20%", scen)
+    if args.pregunta:
+        if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")):
+            sys.exit("Falta ANTHROPIC_API_KEY. Crea una en https://platform.claude.com y exportala:\n"
+                     "  export ANTHROPIC_API_KEY=sk-ant-...")
+        from whatif_agent import translate  # import diferido: el modo sin LLM no requiere anthropic
+
+        scenario = translate(args.pregunta, base_data)
+        print("\n=== Escenario traducido por Claude ===")
+        print(json.dumps(scenario.to_dict(), ensure_ascii=False, indent=2))
+        operations, title = scenario.operations, f"Escenario: {scenario.interpretation}"
+    else:
+        operations, title = EXAMPLE_SCENARIO, "Escenario: Planta Santiago al 50% + demanda norte +20%"
+
+    scen = solve(apply_operations(base_data, operations), verbose=args.verbose)
+    print_result(title, scen)
 
     print_delta(base, scen)
 
