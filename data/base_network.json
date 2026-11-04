@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "name": "Red de distribucion Chile - caso base",
+    "units": {"flow": "pallets/semana", "cost": "USD"},
+    "unmet_demand_penalty": 500
+  },
+  "factories": {
+    "Planta Santiago":   {"capacity": 150, "region": "centro"},
+    "Planta Concepcion": {"capacity": 100, "region": "sur"}
+  },
+  "depots": {
+    "CD Antofagasta": {"capacity": 70,  "fixed_cost": 9000, "region": "norte"},
+    "CD La Serena":   {"capacity": 50,  "fixed_cost": 6000, "region": "norte"},
+    "CD Santiago":    {"capacity": 120, "fixed_cost": 8000, "region": "centro"},
+    "CD Temuco":      {"capacity": 60,  "fixed_cost": 7000, "region": "sur"}
+  },
+  "customers": {
+    "Arica":        {"demand": 15, "region": "norte"},
+    "Iquique":      {"demand": 20, "region": "norte"},
+    "Calama":       {"demand": 25, "region": "norte"},
+    "Antofagasta":  {"demand": 30, "region": "norte"},
+    "La Serena":    {"demand": 20, "region": "centro"},
+    "Valparaiso":   {"demand": 35, "region": "centro"},
+    "Rancagua":     {"demand": 20, "region": "centro"},
+    "Talca":        {"demand": 15, "region": "sur"},
+    "Temuco":       {"demand": 20, "region": "sur"},
+    "Puerto Montt": {"demand": 20, "region": "sur"}
+  },
+  "arcs": [
+    {"from": "Planta Santiago",   "to": "CD Antofagasta", "cost": 45},
+    {"from": "Planta Santiago",   "to": "CD La Serena",   "cost": 18},
+    {"from": "Planta Santiago",   "to": "CD Santiago",    "cost": 2},
+    {"from": "Planta Santiago",   "to": "CD Temuco",      "cost": 22},
+    {"from": "Planta Concepcion", "to": "CD Antofagasta", "cost": 55},
+    {"from": "Planta Concepcion", "to": "CD La Serena",   "cost": 28},
+    {"from": "Planta Concepcion", "to": "CD Santiago",    "cost": 15},
+    {"from": "Planta Concepcion", "to": "CD Temuco",      "cost": 9},
+
+    {"from": "Planta Santiago",   "to": "Valparaiso", "cost": 6},
+    {"from": "Planta Santiago",   "to": "Rancagua",   "cost": 5},
+    {"from": "Planta Concepcion", "to": "Talca",      "cost": 8},
+
+    {"from": "CD Antofagasta", "to": "Arica",        "cost": 25},
+    {"from": "CD Antofagasta", "to": "Iquique",      "cost": 17},
+    {"from": "CD Antofagasta", "to": "Calama",       "cost": 9},
+    {"from": "CD Antofagasta", "to": "Antofagasta",  "cost": 2},
+    {"from": "CD La Serena",   "to": "Antofagasta",  "cost": 32},
+    {"from": "CD La Serena",   "to": "Calama",       "cost": 36},
+    {"from": "CD La Serena",   "to": "La Serena",    "cost": 2},
+    {"from": "CD La Serena",   "to": "Valparaiso",   "cost": 15},
+    {"from": "CD Santiago",    "to": "La Serena",    "cost": 16},
+    {"from": "CD Santiago",    "to": "Valparaiso",   "cost": 4},
+    {"from": "CD Santiago",    "to": "Rancagua",     "cost": 4},
+    {"from": "CD Santiago",    "to": "Talca",        "cost": 9},
+    {"from": "CD Temuco",      "to": "Talca",        "cost": 12},
+    {"from": "CD Temuco",      "to": "Temuco",       "cost": 2},
+    {"from": "CD Temuco",      "to": "Puerto Montt", "cost": 10}
+  ]
+}

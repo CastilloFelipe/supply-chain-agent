@@ -1,0 +1,9 @@
+# Optimizacion
+gurobipy>=12.0        # pip trae licencia restringida (2000 vars/restr.); usa tu licencia academica para casos grandes
+
+# Testing
+pytest>=8.0
+
+# --- Fases siguientes (descomentar cuando se implementen) ---
+# anthropic>=0.40     # Capa LLM: traduccion lenguaje natural -> escenario y reporte ejecutivo
+# pandas>=2.2         # Carga del dataset DataCo Smart Supply Chain
