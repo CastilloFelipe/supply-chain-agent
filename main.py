@@ -12,6 +12,7 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
@@ -67,9 +68,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verbose", action="store_true", help="Mostrar log de Gurobi")
     parser.add_argument("--pregunta", help="Pregunta what-if en lenguaje natural (usa Claude)")
+    parser.add_argument("--datos", default=str(BASE_DATA), help="JSON de la red (por defecto, caso base)")
     args = parser.parse_args()
 
-    base_data = load_network(BASE_DATA)
+    base_data = load_network(args.datos)
     base = solve(base_data, verbose=args.verbose)
     print_result("Caso base", base)
 
@@ -86,10 +88,27 @@ def main() -> None:
     else:
         operations, title = EXAMPLE_SCENARIO, "Escenario: Planta Santiago al 50% + demanda norte +20%"
 
-    scen = solve(apply_operations(base_data, operations), verbose=args.verbose)
+    scen_data = apply_operations(base_data, operations)
+    scen = solve(scen_data, verbose=args.verbose)
     print_result(title, scen)
 
     print_delta(base, scen)
+
+    if args.pregunta:
+        from whatif_agent.report import compare, write_report
+
+        print("\nRedactando reporte ejecutivo...")
+        cmp = compare(base, scen, base_data, scen_data)
+        report = write_report(args.pregunta, cmp, scenario.to_dict(), base_data.meta.get("units"))
+        out_dir = Path(__file__).parent / "outputs" / datetime.now().strftime("%Y%m%d-%H%M%S")
+        out_dir.mkdir(parents=True)
+        (out_dir / "reporte.md").write_text(report, encoding="utf-8")
+        # Escenario + comparacion: permite re-ejecutar y auditar sin volver a llamar al LLM.
+        (out_dir / "escenario.json").write_text(
+            json.dumps({"escenario": scenario.to_dict(), "comparacion": cmp}, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        print(f"\n{report}\nGuardado en {out_dir}")
 
 
 if __name__ == "__main__":

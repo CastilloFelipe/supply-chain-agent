@@ -31,19 +31,41 @@ Pregunta (lenguaje natural)
 ```
 ├── main.py                     # Demo: caso base + escenario de ejemplo
 ├── data/base_network.json      # Red de ejemplo: 2 plantas, 4 CDs, 10 clientes (Chile)
+├── data/orlib/                 # Instancias benchmark OR-Library (cap41, cap71, cap101, cap131)
+├── scripts/import_orlib.py     # Conversor de OR-Library al formato de la red
 ├── src/network_opt/
 │   ├── data.py                 # NetworkData: carga y validación
 │   ├── model.py                # MILP en gurobipy (variables, objetivo, restricciones)
 │   └── scenario.py             # Operaciones what-if (lista blanca)
 ├── src/whatif_agent/
 │   ├── tools.py                # Herramientas para Claude (enums desde los datos, strict)
-│   └── translator.py           # Pregunta en lenguaje natural -> operaciones JSON
+│   ├── translator.py           # Pregunta en lenguaje natural -> operaciones JSON
+│   └── report.py               # Comparación base vs escenario + reporte ejecutivo
 ├── tests/                      # pytest
 └── docs/                       # Notas de diseño y formulación
 ```
 
-Fases siguientes: redactor del reporte ejecutivo y cargador del dataset
-DataCo Smart Supply Chain.
+## Validación contra la literatura
+
+El modelo se valida con las instancias de *Capacitated Warehouse Location* de la
+[OR-Library](http://people.brunel.ac.uk/~mastjjb/jeb/orlib/capinfo.html) (J.E. Beasley),
+que tienen óptimos publicados. Los tests exigen reproducirlos:
+
+| Instancia | Bodegas × clientes | Óptimo publicado | Este modelo |
+|---|---|---:|---:|
+| cap41  | 16 × 50 | 1,040,444.375 | 1,040,444.375 |
+| cap71  | 16 × 50 |   932,615.750 |   932,615.750 |
+| cap101 | 25 × 50 |   796,648.437 |   796,648.438 |
+| cap131 | 50 × 50 |   793,439.562 | requiere licencia académica |
+
+Correr una instancia benchmark:
+
+```bash
+python main.py --datos data/orlib/cap101.json --pregunta "¿Qué pasa si cerramos la bodega B005 y la demanda total sube 10%?"
+```
+
+Las instancias más grandes (`capa`, `capb`, `capc`: 100 × 1000) se convierten con
+`scripts/import_orlib.py`.
 
 ## Formulación
 
