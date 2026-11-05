@@ -15,6 +15,7 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT / "src"), str(ROOT / "app")]
 
+import textos  # noqa: E402
 from charts import has_coordinates, network_map, unmet_chart, utilization_chart  # noqa: E402
 from manual import ManualInputs, build_operations  # noqa: E402
 from network_opt import load_network, solve  # noqa: E402
@@ -87,10 +88,18 @@ st.caption("Optimización MILP con Gurobi + traducción de preguntas de negocio 
            f"Red: **{dataset_label}** · {len(data.factories)} plantas, {len(data.depots)} CDs, "
            f"{len(data.customers)} clientes")
 
-if mode == "Pregunta a Claude":
-    if not HAS_KEY:
-        st.warning("Para este modo define la variable de entorno `ANTHROPIC_API_KEY` antes de "
-                   "lanzar la app. El modo manual funciona sin ella.")
+if mode == "Pregunta a Claude" and not HAS_KEY:
+    if textos.ejemplo_claude():
+        if path != str(DATASETS[next(iter(DATASETS))]):
+            st.warning("El ejemplo es para la red de Chile: elígela en la barra lateral.")
+        else:
+            from whatif_agent.offline import load_scenario
+
+            ejemplo = load_scenario(textos.EJEMPLO_ESCENARIO, data)
+            st.session_state.run = {"path": path, "question": ejemplo.question,
+                                    "translated": ejemplo.to_dict(), "ops": ejemplo.operations,
+                                    "ejemplo": True}
+elif mode == "Pregunta a Claude":
     example = st.selectbox("Ejemplos", ["(escribe tu propia pregunta)", *EXAMPLES])
     question = st.text_area("Pregunta de negocio",
                             value="" if example.startswith("(") else example, height=90)
@@ -107,7 +116,7 @@ if mode == "Pregunta a Claude":
 
 run = st.session_state.get("run")
 if not run or run["path"] != path:
-    st.info("Configura un escenario en la barra lateral (o haz una pregunta) y presiona **Simular**.")
+    textos.intro()
     st.stop()
 
 try:
@@ -163,6 +172,8 @@ if ks["demanda_no_servida"] > 1e-6:
              f"({1 - ks['nivel_servicio']:.1%} de la demanda). Un costo de transporte menor en este "
              "escenario no es una mejora: refleja menos unidades despachadas.")
 
+textos.guia_resultados()
+
 tab_map, tab_util, tab_unmet, tab_num, tab_report = st.tabs(
     ["Mapa de flujos", "Utilización", "Demanda no servida", "Cifras", "Reporte ejecutivo"])
 
@@ -201,8 +212,12 @@ with tab_num:
                     f"**CDs que abren:** {', '.join(cds['abiertos_en_escenario']) or '—'}")
 
 with tab_report:
-    if not HAS_KEY:
-        st.info("El reporte ejecutivo lo redacta Claude: define `ANTHROPIC_API_KEY` para activarlo.")
+    if not HAS_KEY and run.get("ejemplo"):
+        st.markdown(textos.EJEMPLO_REPORTE.read_text(encoding="utf-8"))
+    elif not HAS_KEY:
+        st.info("El reporte ejecutivo lo redacta Claude: en la versión pública no hay API key "
+                "conectada. Mira el ejemplo en el modo **Pregunta a Claude**, o corre la app "
+                "localmente con `ANTHROPIC_API_KEY`.")
     elif st.button("Generar reporte ejecutivo"):
         from whatif_agent.report import ReportError, write_report
 

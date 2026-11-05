@@ -172,6 +172,13 @@ streamlit run app/streamlit_app.py
 - **Vistas:** KPIs, mapa georreferenciado (base vs escenario), utilización, quiebres por
   cliente, tabla de cifras y reporte descargable.
 
+**Publicarla en Streamlit Community Cloud:** en [share.streamlit.io](https://share.streamlit.io)
+→ *Create app* → repositorio `CastilloFelipe/supply-chain-agent`, rama `main`, archivo
+`app/streamlit_app.py`, Python 3.12. La versión pública funciona sin API key: el modo manual
+completo, las instancias OR-Library y, en el modo *Pregunta a Claude*, un ejemplo real de
+pregunta traducida y su reporte que se puede cargar en el simulador. La licencia restringida
+de `gurobipy` alcanza para todas las redes salvo cap131.
+
 ### Claude Code, sin API key
 
 Los skills del repositorio (`.claude/skills/`) dejan a Claude Code como traductor y
