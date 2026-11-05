@@ -1,0 +1,102 @@
+[
+ {
+  "id": "01_absoluto_demanda",
+  "pregunta": "La demanda de Arica sube en 10 pallets por semana. ¿Cómo impacta a la red?"
+ },
+ {
+  "id": "02_absoluto_capacidad",
+  "pregunta": "Por una falla, la planta de Concepción pierde 40 pallets semanales de capacidad. ¿Qué pasa?"
+ },
+ {
+  "id": "03_norte_grande",
+  "pregunta": "¿Qué pasa si la demanda del Norte Grande sube 25%?"
+ },
+ {
+  "id": "04_bodegas_del_sur",
+  "pregunta": "Cerramos todas las bodegas del sur. ¿Cómo queda la red?"
+ },
+ {
+  "id": "05_relativo_sin_dato",
+  "pregunta": "¿Qué pasa si la demanda vuelve al nivel del año pasado?"
+ },
+ {
+  "id": "06_contradictorio",
+  "pregunta": "Cerramos todos los CDs pero seguimos atendiendo a todos los clientes. ¿Se puede?"
+ },
+ {
+  "id": "07_pregunta_de_optimizacion",
+  "pregunta": "¿Qué CD conviene cerrar?"
+ },
+ {
+  "id": "08_relativo_encadenado",
+  "pregunta": "La demanda del centro crece 20% y la del sur la mitad de eso. ¿Qué pasa?"
+ },
+ {
+  "id": "09_compuesto",
+  "pregunta": "La demanda del norte sube 10% este año y otro 10% el próximo. ¿Cómo queda la red el próximo año?"
+ },
+ {
+  "id": "10_capacidad_cero",
+  "pregunta": "Todo igual, salvo que la planta de Santiago no puede producir nada."
+ },
+ {
+  "id": "11_queda_en",
+  "pregunta": "La capacidad del CD Antofagasta queda en un 80% de lo actual."
+ },
+ {
+  "id": "12_salidas_bloqueadas",
+  "pregunta": "No pueden salir camiones del CD de Antofagasta. ¿Qué hacemos?"
+ },
+ {
+  "id": "13_tarifa_absoluta",
+  "pregunta": "El flete entre la planta de Concepción y el CD Temuco sube de 9 a 12 dólares por pallet."
+ },
+ {
+  "id": "14_ambiguo_temuco",
+  "pregunta": "¿Qué pasa si la demanda de Temuco cae a la mitad?"
+ },
+ {
+  "id": "15_variable_no_modelada",
+  "pregunta": "¿Y si hacemos nearshoring y baja el lead time?"
+ },
+ {
+  "id": "16_obligado_y_limite",
+  "pregunta": "Mantenemos obligatoriamente el CD Santiago, pero la red no puede tener más de 2 CDs."
+ },
+ {
+  "id": "17_orlib_combinado",
+  "pregunta": "Cierra la bodega B005 y aumenta 10% la demanda de todos los clientes.",
+  "datos": "data/orlib/cap101.json"
+ },
+ {
+  "id": "18_orlib_todas_las_bodegas",
+  "pregunta": "Todas las bodegas pierden un 20% de capacidad. ¿Qué pasa?",
+  "datos": "data/orlib/cap41.json"
+ },
+ {
+  "id": "19_orlib_cliente",
+  "pregunta": "El cliente C0007 duplica su demanda.",
+  "datos": "data/orlib/cap41.json"
+ },
+ {
+  "id": "20_orlib_consolidar",
+  "pregunta": "Opera con un máximo de 10 bodegas.",
+  "datos": "data/orlib/cap41.json"
+ },
+ {
+  "id": "21_unidad_sin_conversion",
+  "pregunta": "El diésel sube 150 pesos por litro. ¿Cómo afecta?"
+ },
+ {
+  "id": "22_dos_cambios_distintos",
+  "pregunta": "Supongamos que la ruta a Arica está cortada y además el CD La Serena trabaja al 120% de su capacidad."
+ },
+ {
+  "id": "23_perder_region",
+  "pregunta": "Perdemos todos los clientes del sur."
+ },
+ {
+  "id": "24_fuera_de_dominio",
+  "pregunta": "¿Cuál es la capital de Chile?"
+ }
+]

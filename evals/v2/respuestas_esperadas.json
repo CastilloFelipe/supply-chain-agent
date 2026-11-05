@@ -1,0 +1,473 @@
+{
+ "_nota": "NO mostrar este archivo a quien traduce. Set v2: casos mas exigentes.",
+ "01_absoluto_demanda": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.6666666666666667,
+     "customer": "Arica"
+    }
+   ]
+  ],
+  "nota": "Arica demanda 15 -> 25: factor 1.6667"
+ },
+ "02_absoluto_capacidad": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_factory_capacity",
+     "factory": "Planta Concepcion",
+     "factor": 0.6
+    }
+   ]
+  ],
+  "nota": "100 -> 60"
+ },
+ "03_norte_grande": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.25,
+     "region": "norte"
+    }
+   ],
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.25,
+     "customer": "Arica"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.25,
+     "customer": "Iquique"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.25,
+     "customer": "Calama"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.25,
+     "customer": "Antofagasta"
+    }
+   ]
+  ],
+  "nota": "Norte Grande = Arica, Iquique, Calama, Antofagasta = region norte de los datos"
+ },
+ "04_bodegas_del_sur": {
+  "aceptables": [
+   [
+    {
+     "op": "close_depot",
+     "depot": "CD Temuco"
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Temuco",
+     "factor": 0.0
+    }
+   ]
+  ],
+  "nota": "Unico CD en region sur"
+ },
+ "05_relativo_sin_dato": {
+  "aceptables": [
+   []
+  ],
+  "unsupported": true,
+  "nota": "No hay datos del año pasado"
+ },
+ "06_contradictorio": {
+  "aceptables": [
+   [
+    {
+     "op": "close_depot",
+     "depot": "CD Antofagasta"
+    },
+    {
+     "op": "close_depot",
+     "depot": "CD La Serena"
+    },
+    {
+     "op": "close_depot",
+     "depot": "CD Santiago"
+    },
+    {
+     "op": "close_depot",
+     "depot": "CD Temuco"
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Antofagasta",
+     "factor": 0.0
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD La Serena",
+     "factor": 0.0
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Santiago",
+     "factor": 0.0
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Temuco",
+     "factor": 0.0
+    }
+   ],
+   [
+    {
+     "op": "set_max_open_depots",
+     "n": 0
+    }
+   ]
+  ],
+  "unsupported": true,
+  "nota": "Cerrar es modelable; 'atender a todos' es un objetivo, no un parametro"
+ },
+ "07_pregunta_de_optimizacion": {
+  "aceptables": [
+   []
+  ],
+  "nota": "No es un what-if: el caso base ya optimiza que CDs operan. No debe inventar cambios"
+ },
+ "08_relativo_encadenado": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.2,
+     "region": "centro"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.1,
+     "region": "sur"
+    }
+   ]
+  ]
+ },
+ "09_compuesto": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.21,
+     "region": "norte"
+    }
+   ],
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.1,
+     "region": "norte"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.1,
+     "region": "norte"
+    }
+   ]
+  ],
+  "nota": "Crecimiento compuesto: 1.21"
+ },
+ "10_capacidad_cero": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_factory_capacity",
+     "factory": "Planta Santiago",
+     "factor": 0.0
+    }
+   ]
+  ]
+ },
+ "11_queda_en": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Antofagasta",
+     "factor": 0.8
+    }
+   ]
+  ]
+ },
+ "12_salidas_bloqueadas": {
+  "aceptables": [
+   [
+    {
+     "op": "block_route",
+     "origin": "CD Antofagasta",
+     "destination": null
+    }
+   ],
+   [
+    {
+     "op": "close_depot",
+     "depot": "CD Antofagasta"
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Antofagasta",
+     "factor": 0.0
+    }
+   ]
+  ]
+ },
+ "13_tarifa_absoluta": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_arc_costs",
+     "factor": 1.3333333333333333,
+     "origin": "Planta Concepcion",
+     "destination": "CD Temuco"
+    }
+   ]
+  ]
+ },
+ "14_ambiguo_temuco": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 0.5,
+     "customer": "Temuco"
+    }
+   ]
+  ],
+  "nota": "Temuco es cliente (demanda); el CD no tiene demanda"
+ },
+ "15_variable_no_modelada": {
+  "aceptables": [
+   []
+  ],
+  "unsupported": true,
+  "nota": "Lead time no existe en el modelo"
+ },
+ "16_obligado_y_limite": {
+  "aceptables": [
+   [
+    {
+     "op": "force_open_depot",
+     "depot": "CD Santiago"
+    },
+    {
+     "op": "set_max_open_depots",
+     "n": 2
+    }
+   ]
+  ]
+ },
+ "17_orlib_combinado": {
+  "aceptables": [
+   [
+    {
+     "op": "close_depot",
+     "depot": "B005"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.1,
+     "region": null
+    }
+   ],
+   [
+    {
+     "op": "close_depot",
+     "depot": "B005"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.1,
+     "region": "general"
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B005",
+     "factor": 0.0
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.1,
+     "region": null
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B005",
+     "factor": 0.0
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.1,
+     "region": "general"
+    }
+   ]
+  ]
+ },
+ "18_orlib_todas_las_bodegas": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B001",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B002",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B003",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B004",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B005",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B006",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B007",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B008",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B009",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B010",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B011",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B012",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B013",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B014",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B015",
+     "factor": 0.8
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B016",
+     "factor": 0.8
+    }
+   ]
+  ],
+  "nota": "No hay comodin para capacidad de CDs: requiere 16 llamadas"
+ },
+ "19_orlib_cliente": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 2.0,
+     "customer": "C0007"
+    }
+   ]
+  ]
+ },
+ "20_orlib_consolidar": {
+  "aceptables": [
+   [
+    {
+     "op": "set_max_open_depots",
+     "n": 10
+    }
+   ]
+  ]
+ },
+ "21_unidad_sin_conversion": {
+  "aceptables": [
+   []
+  ],
+  "unsupported": true,
+  "nota": "Sin precio base del diesel ni su peso en el flete no se puede convertir a factor"
+ },
+ "22_dos_cambios_distintos": {
+  "aceptables": [
+   [
+    {
+     "op": "block_route",
+     "origin": null,
+     "destination": "Arica"
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD La Serena",
+     "factor": 1.2
+    }
+   ]
+  ]
+ },
+ "23_perder_region": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 0.0,
+     "region": "sur"
+    }
+   ]
+  ]
+ },
+ "24_fuera_de_dominio": {
+  "aceptables": [
+   []
+  ],
+  "nota": "Fuera de dominio: no debe generar operaciones"
+ }
+}

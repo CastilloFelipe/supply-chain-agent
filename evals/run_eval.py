@@ -1,8 +1,11 @@
 """Evalua el traductor contra respuestas esperadas.
 
 Dos fuentes de predicciones:
-    python evals/run_eval.py --predicciones evals/predicciones/<corrida>   # archivos <id>.json (formato --escenario)
-    python evals/run_eval.py --api                                         # llama al traductor con API
+    python evals/run_eval.py --set v2 --predicciones evals/predicciones/<corrida>   # archivos <id>.json
+    python evals/run_eval.py --set v2 --api                                         # traductor con API
+
+Cada set vive en evals/<set>/ (preguntas.json + respuestas_esperadas.json). Una
+pregunta puede indicar "datos" (red sobre la que se hace); por defecto, Chile.
 
 Criterio por caso: ACIERTO si el conjunto de operaciones coincide con alguna
 respuesta aceptable (sin importar el orden; factores con tolerancia 0.005) y,
@@ -62,11 +65,22 @@ def score_case(pred_ops: list[dict] | None, unsupported: str, expected: dict, er
             else "ok (declaro algo no modelable sin necesidad)"}
 
 
-def predict_from_files(folder: Path, questions: list[dict], data) -> dict:
+_NETWORKS: dict = {}
+
+
+def network_for(q: dict):
+    path = str(ROOT / q.get("datos", "data/base_network.json"))
+    if path not in _NETWORKS:
+        _NETWORKS[path] = load_network(path)
+    return _NETWORKS[path]
+
+
+def predict_from_files(folder: Path, questions: list[dict]) -> dict:
     from whatif_agent.offline import load_scenario
 
     out = {}
     for q in questions:
+        data = network_for(q)
         f = folder / f"{q['id']}.json"
         if not f.exists():
             out[q["id"]] = (None, "", "falta archivo de prediccion")
@@ -79,13 +93,13 @@ def predict_from_files(folder: Path, questions: list[dict], data) -> dict:
     return out
 
 
-def predict_with_api(questions: list[dict], data) -> dict:
+def predict_with_api(questions: list[dict]) -> dict:
     from whatif_agent import TranslationError, translate
 
     out = {}
     for q in questions:
         try:
-            s = translate(q["pregunta"], data)
+            s = translate(q["pregunta"], network_for(q))
             out[q["id"]] = (s.operations, s.unsupported, "")
         except (TranslationError, ValueError) as e:
             out[q["id"]] = (None, "", str(e))
@@ -98,14 +112,13 @@ def main() -> None:
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--predicciones", help="Carpeta con <id>.json por pregunta")
     g.add_argument("--api", action="store_true", help="Traducir con la API de Anthropic")
-    ap.add_argument("--datos", default=str(ROOT / "data" / "base_network.json"))
+    ap.add_argument("--set", default="v1", help="Set de evaluacion (carpeta en evals/)")
     args = ap.parse_args()
 
-    data = load_network(args.datos)
-    questions = json.loads((EVALS / "preguntas.json").read_text(encoding="utf-8"))
-    expected = json.loads((EVALS / "respuestas_esperadas.json").read_text(encoding="utf-8"))
-    preds = (predict_from_files(Path(args.predicciones), questions, data) if args.predicciones
-             else predict_with_api(questions, data))
+    questions = json.loads((EVALS / args.set / "preguntas.json").read_text(encoding="utf-8"))
+    expected = json.loads((EVALS / args.set / "respuestas_esperadas.json").read_text(encoding="utf-8"))
+    preds = (predict_from_files(Path(args.predicciones), questions) if args.predicciones
+             else predict_with_api(questions))
 
     rows = []
     for q in questions:
@@ -117,17 +130,28 @@ def main() -> None:
     hits = sum(r["acierto"] for r in rows)
     source = args.predicciones or "api"
     lines = [f"# Evaluación del traductor", "",
-             f"Fuente: `{source}` · {datetime.now():%Y-%m-%d %H:%M}", "",
+             f"Set: `{args.set}` · Fuente: `{source}` · {datetime.now():%Y-%m-%d %H:%M}", "",
              f"**Aciertos: {hits} de {len(rows)} ({hits / len(rows):.0%})**", "",
              "| Caso | Resultado | Detalle |", "|---|---|---|"]
     for r in rows:
         lines.append(f"| {r['id']} | {'✅' if r['acierto'] else '❌'} | {r['motivo']} |")
+    fails = [r for r in rows if not r["acierto"]]
+    if fails:
+        lines += ["", "## Fallos", ""]
+        for r in fails:
+            exp = expected[r["id"]]
+            lines += [f"**{r['id']}** — {r['pregunta']}", "",
+                      f"- Predicción: `{json.dumps(r['prediccion'], ensure_ascii=False)}`"
+                      + (f" · unsupported: _{r['unsupported']}_" if r["unsupported"] else ""),
+                      f"- Esperado: `{json.dumps(exp['aceptables'][0], ensure_ascii=False)}`"
+                      + (" + declarar no modelable" if exp.get("unsupported") else "")
+                      + (f" ({exp['nota']})" if exp.get("nota") else ""), ""]
     report = "\n".join(lines) + "\n"
     print(report)
 
     out = EVALS / "resultados"
     out.mkdir(exist_ok=True)
-    stem = f"{datetime.now():%Y%m%d-%H%M%S}"
+    stem = f"{args.set}-{datetime.now():%Y%m%d-%H%M%S}"
     (out / f"{stem}.md").write_text(report, encoding="utf-8")
     (out / f"{stem}.json").write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Guardado en evals/resultados/{stem}.md")

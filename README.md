@@ -48,20 +48,25 @@ Pregunta (lenguaje natural)
 
 ## Evaluación del traductor
 
-`evals/` tiene 22 preguntas de negocio con sus traducciones correctas. Incluye casos
-ambiguos ("la producción en Santiago"), trampas de porcentaje ("se reduce en 30%" es
-0,7 y no 0,3) y preguntas no modelables, donde el traductor debe declararlo en vez
-de aproximar. Las preguntas (`preguntas.json`) están separadas de las respuestas
-(`respuestas_esperadas.json`) para que la traducción se haga a ciegas.
+`evals/<set>/` tiene preguntas de negocio con sus traducciones correctas. Las preguntas
+(`preguntas.json`) están separadas de las respuestas (`respuestas_esperadas.json`) para
+que la traducción se haga a ciegas.
+
+- **v1 (22 casos):** cambios básicos, ambigüedad ("la producción en Santiago"), trampas
+  de porcentaje ("se reduce en 30%" es 0,7 y no 0,3) y preguntas no modelables.
+- **v2 (24 casos, más exigente):** cantidades absolutas que hay que convertir a factores,
+  lenguaje coloquial ("Norte Grande"), crecimiento compuesto, escenarios contradictorios,
+  preguntas de optimización o fuera de dominio que no deben generar cambios, y preguntas
+  sobre instancias OR-Library.
 
 ```bash
-python evals/run_eval.py --predicciones evals/predicciones/ciega-01   # traducciones de Claude Code
-python evals/run_eval.py --api                                       # traductor con API
+python evals/run_eval.py --set v1 --predicciones evals/predicciones/v1-ciega-01   # Claude Code
+python evals/run_eval.py --set v2 --api                                          # traductor con API
 ```
 
 | Corrida | Traductor | Aciertos |
 |---|---|---|
-| ciega-01 | Claude Code, agente sin acceso a las respuestas | 22 / 22 |
+| v1-ciega-01 | Claude Code, agente sin acceso a las respuestas | 22 / 22 |
 
 El 100% indica que el set v1 es fácil para esta red, que es chica y trae nombres
 cerrados por `enum`. Hace falta un set v2 más exigente antes de sacar conclusiones.

@@ -1,5 +1,7 @@
 import json
 import sys
+
+import pytest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,12 +31,14 @@ def test_unsupported_must_be_declared():
     assert score_case([], "No hay herramienta para abrir CDs nuevos", exp)["acierto"]
 
 
-def test_expected_answers_are_valid_scenarios():
+@pytest.mark.parametrize("eval_set", ["v1", "v2"])
+def test_expected_answers_are_valid_scenarios(eval_set):
     """Cada respuesta esperada debe ser un escenario ejecutable (evita errores en el set)."""
-    data = load_network(ROOT / "data" / "base_network.json")
-    expected = json.loads((ROOT / "evals" / "respuestas_esperadas.json").read_text(encoding="utf-8"))
-    questions = json.loads((ROOT / "evals" / "preguntas.json").read_text(encoding="utf-8"))
+    folder = ROOT / "evals" / eval_set
+    expected = json.loads((folder / "respuestas_esperadas.json").read_text(encoding="utf-8"))
+    questions = json.loads((folder / "preguntas.json").read_text(encoding="utf-8"))
     assert {q["id"] for q in questions} == {k for k in expected if not k.startswith("_")}
-    for case in (v for k, v in expected.items() if not k.startswith("_")):
-        for alt in case["aceptables"]:
+    for q in questions:
+        data = load_network(ROOT / q.get("datos", "data/base_network.json"))
+        for alt in expected[q["id"]]["aceptables"]:
             apply_operations(data, alt)

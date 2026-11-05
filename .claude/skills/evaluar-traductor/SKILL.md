@@ -1,21 +1,23 @@
 ---
 name: evaluar-traductor
-description: Corre el set de evaluación del traductor (evals/preguntas.json) traduciendo cada pregunta a ciegas y luego mide los aciertos. Úsalo cuando el usuario pida evaluar o medir la precisión del traductor.
+description: Corre un set de evaluación del traductor (evals/<set>/preguntas.json) traduciendo cada pregunta a ciegas y luego mide los aciertos. Úsalo cuando el usuario pida evaluar o medir la precisión del traductor.
 ---
 
 # Evaluación a ciegas del traductor
 
-**Regla principal: NO abras, leas ni busques en `evals/respuestas_esperadas.json`**
+**Regla principal: NO abras, leas ni busques en ningún `evals/*/respuestas_esperadas.json`**
 (ni en `evals/resultados/`) hasta el paso 3. Si las ves antes, la evaluación pierde
 validez: dilo al usuario y no reportes el puntaje.
 
 ## 1. Preparar
 
-```bash
-python main.py --catalogo
-```
+Elige el set (por defecto el más reciente, p.ej. `v2`). Lee `evals/<set>/preguntas.json`
+y crea `evals/predicciones/<set>-<YYYYMMDD-HHMM>/`. Algunas preguntas traen `datos`:
+esa es la red sobre la que se traduce. Obtén el catálogo de cada red con:
 
-Lee `evals/preguntas.json`. Crea `evals/predicciones/<YYYYMMDD-HHMM>/`.
+```bash
+python main.py --catalogo --datos <datos>   # sin --datos: red de Chile
+```
 
 ## 2. Traducir cada pregunta
 
@@ -28,10 +30,10 @@ no corrijas traducciones después de ver resultados.
 ## 3. Medir
 
 ```bash
-python evals/run_eval.py --predicciones evals/predicciones/<corrida>
+python evals/run_eval.py --set <set> --predicciones evals/predicciones/<corrida>
 ```
 
 Reporta el puntaje y, para cada fallo, la pregunta, lo que tradujiste y lo
-esperado (ahora sí puedes leer `respuestas_esperadas.json`). Si un fallo muestra
+esperado (ahora sí puedes leer `evals/<set>/respuestas_esperadas.json`). Si un fallo muestra
 que la respuesta esperada es discutible, dilo, pero no cambies el puntaje de esta
 corrida.
