@@ -41,6 +41,7 @@ Pregunta (lenguaje natural)
 │   ├── tools.py                # Herramientas para Claude (enums desde los datos, strict)
 │   ├── translator.py           # Pregunta en lenguaje natural -> operaciones JSON
 │   └── report.py               # Comparación base vs escenario + reporte ejecutivo
+├── app/                        # Demo web (Streamlit + Plotly)
 ├── tests/                      # pytest
 └── docs/                       # Notas de diseño y formulación
 ```
@@ -102,6 +103,21 @@ pip install -r requirements.txt
 python main.py                 # escenario de ejemplo, sin LLM
 pytest                         # los tests usan un cliente falso: no gastan créditos
 ```
+
+### Demo web
+
+```bash
+streamlit run app/streamlit_app.py
+```
+
+- **Escenario manual:** se arma con controles deslizantes (capacidad de plantas, demanda
+  por región, costos, cierre de CDs, consolidación). No usa el LLM ni gasta créditos.
+- **Pregunta a Claude:** traduce la pregunta y redacta el reporte ejecutivo. Requiere
+  `ANTHROPIC_API_KEY`.
+- **Vistas:** KPIs, mapa georreferenciado de flujos (base vs escenario), utilización de
+  capacidad, quiebres por cliente, tabla de cifras y reporte descargable.
+
+![Demo](docs/demo_mapa.png)
 
 ### Preguntas en lenguaje natural
 

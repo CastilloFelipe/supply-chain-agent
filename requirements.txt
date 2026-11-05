@@ -4,6 +4,10 @@ gurobipy>=12.0        # pip trae licencia restringida (2000 vars/restr.); usa tu
 # Capa LLM (traductor de preguntas y, luego, reporte ejecutivo)
 anthropic>=2.5
 
+# Demo web
+streamlit>=1.40
+plotly>=5.24
+
 # Testing
 pytest>=8.0
 
