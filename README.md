@@ -1,6 +1,7 @@
 # Agente de Optimización de Red Logística
 
 [![tests](https://github.com/CastilloFelipe/supply-chain-agent/actions/workflows/tests.yml/badge.svg)](https://github.com/CastilloFelipe/supply-chain-agent/actions/workflows/tests.yml)
+[![Abrir la app](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://llm-supply-chain-agent.streamlit.app/)
 ![Python](https://img.shields.io/badge/python-3.12-blue)
 ![Gurobi](https://img.shields.io/badge/solver-Gurobi-red)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
@@ -161,6 +162,8 @@ porque se dejan de hacer los despachos más largos.
 ## Formas de uso
 
 ### Demo web
+
+**App en línea:** https://llm-supply-chain-agent.streamlit.app/
 
 ```bash
 streamlit run app/streamlit_app.py
