@@ -1,0 +1,15 @@
+{
+  "question": "No pueden salir camiones del CD de Antofagasta. ¿Qué hacemos?",
+  "interpretation": "Se bloquean todas las rutas que salen del CD Antofagasta; el optimizador decide como reasignar.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "block_route",
+      "input": {
+        "origin": "CD Antofagasta",
+        "destination": "*"
+      }
+    }
+  ]
+}

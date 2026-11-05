@@ -1,0 +1,17 @@
+{
+  "question": "Si la demanda del norte sube 30%, ¿cómo atendemos a todos sin quiebres?",
+  "interpretation": "La demanda de la region norte sube 30%; el objetivo de atender sin quiebres es un resultado, no un cambio.",
+  "assumptions": [
+    "'Sin quiebres' se interpreta como resultado deseado; la simulacion mostrara si se cumple."
+  ],
+  "unsupported": "No se puede imponer como restriccion atender a todos sin quiebres; la simulacion mostrara si hay demanda insatisfecha.",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "norte",
+        "factor": 1.3
+      }
+    }
+  ]
+}

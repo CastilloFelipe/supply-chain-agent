@@ -1,0 +1,15 @@
+{
+  "question": "El arriendo del CD Temuco sube de 7.000 a 8.400 dólares.",
+  "interpretation": "El costo fijo del CD Temuco pasa de 7.000 a 8.400 USD, factor 8400/7000 = 1.2.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_depot_fixed_cost",
+      "input": {
+        "depot": "CD Temuco",
+        "factor": 1.2
+      }
+    }
+  ]
+}

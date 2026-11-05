@@ -1,0 +1,26 @@
+{
+  "question": "Cierra las bodegas B001, B002 y B003.",
+  "interpretation": "Se cierran las bodegas B001, B002 y B003.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "B001"
+      }
+    },
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "B002"
+      }
+    },
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "B003"
+      }
+    }
+  ]
+}

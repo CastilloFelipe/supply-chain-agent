@@ -1,0 +1,7 @@
+{
+  "question": "¿Cuál es la capital de Chile?",
+  "interpretation": "Pregunta de cultura general fuera del dominio del simulador; no hay cambios de parametros.",
+  "assumptions": [],
+  "unsupported": "La pregunta no es un escenario what-if sobre la red logistica.",
+  "calls": []
+}

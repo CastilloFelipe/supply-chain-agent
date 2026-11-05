@@ -1,0 +1,7 @@
+{
+  "question": "¿Qué pasa si los camiones tardan dos días más en llegar a Arica?",
+  "interpretation": "La pregunta cambia tiempos de transito hacia Arica, variable que el modelo no representa.",
+  "assumptions": [],
+  "unsupported": "El modelo no tiene tiempos de transito ni lead times; un retraso de dos dias en llegar a Arica no se puede expresar con las herramientas.",
+  "calls": []
+}

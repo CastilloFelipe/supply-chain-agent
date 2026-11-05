@@ -1,0 +1,7 @@
+{
+  "question": "El diésel sube 150 pesos por litro. ¿Cómo afecta?",
+  "interpretation": "Alza del diesel de 150 CLP/litro, sin informacion para convertirla a un factor sobre costos de transporte en USD/pallet.",
+  "assumptions": [],
+  "unsupported": "No hay datos de consumo de combustible por ruta, precio base del diesel ni tipo de cambio para convertir +150 CLP/litro en un factor sobre los costos de transporte; no se aproxima.",
+  "calls": []
+}

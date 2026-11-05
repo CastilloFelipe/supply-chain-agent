@@ -1,0 +1,23 @@
+{
+  "question": "Cierra la bodega B005 y aumenta 10% la demanda de todos los clientes.",
+  "interpretation": "Se cierra la bodega B005 y la demanda de todos los clientes sube 10%.",
+  "assumptions": [
+    "B005 esta cerrada en la base, pero con mas demanda el optimizador podria abrirla; se mantiene el cierre explicito."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "B005"
+      }
+    },
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "*",
+        "factor": 1.1
+      }
+    }
+  ]
+}

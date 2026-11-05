@@ -1,0 +1,7 @@
+{
+  "question": "¿Qué CD conviene cerrar?",
+  "interpretation": "Pregunta de decision (que CD cerrar) que el optimizador ya resuelve; en la solucion base cierra el CD Santiago.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": []
+}

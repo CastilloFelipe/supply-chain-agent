@@ -1,0 +1,7 @@
+{
+  "question": "La demanda de la capital sube 15%.",
+  "interpretation": "La pregunta refiere a la demanda de 'la capital' (Santiago), pero no existe un cliente Santiago en la red.",
+  "assumptions": [],
+  "unsupported": "No hay un cliente ni region 'capital'/Santiago en el modelo (los clientes del centro son La Serena, Valparaiso y Rancagua); no se aproxima con otra region.",
+  "calls": []
+}

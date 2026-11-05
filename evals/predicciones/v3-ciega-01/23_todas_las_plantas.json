@@ -1,0 +1,22 @@
+{
+  "question": "Todas las plantas producen 10% menos.",
+  "interpretation": "La capacidad de ambas plantas baja 10% (factor 0.9).",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Santiago",
+        "factor": 0.9
+      }
+    },
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Concepcion",
+        "factor": 0.9
+      }
+    }
+  ]
+}

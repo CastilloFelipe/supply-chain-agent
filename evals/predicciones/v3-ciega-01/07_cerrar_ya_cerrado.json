@@ -1,0 +1,9 @@
+{
+  "question": "¿Qué pasa si cerramos el CD de Santiago?",
+  "interpretation": "Cerrar el CD Santiago no tiene efecto porque el optimizador ya lo mantiene cerrado en la solucion base; no se agregan cambios.",
+  "assumptions": [
+    "CD Santiago ya esta cerrado en la solucion base (0% de utilizacion)."
+  ],
+  "unsupported": "",
+  "calls": []
+}

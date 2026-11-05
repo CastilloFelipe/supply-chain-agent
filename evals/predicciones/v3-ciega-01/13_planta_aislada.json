@@ -1,0 +1,15 @@
+{
+  "question": "Se cortan todas las rutas que salen de la planta de Concepción.",
+  "interpretation": "Se bloquean todas las rutas que salen de la Planta Concepcion.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "block_route",
+      "input": {
+        "origin": "Planta Concepcion",
+        "destination": "*"
+      }
+    }
+  ]
+}

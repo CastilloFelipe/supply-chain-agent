@@ -1,0 +1,17 @@
+{
+  "question": "¿Qué pasa si la demanda de Temuco cae a la mitad?",
+  "interpretation": "La demanda del cliente Temuco cae a la mitad (factor 0.5).",
+  "assumptions": [
+    "'Temuco' se interpreta como el cliente Temuco, ya que el CD Temuco no tiene demanda."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_customer_demand",
+      "input": {
+        "customer": "Temuco",
+        "factor": 0.5
+      }
+    }
+  ]
+}

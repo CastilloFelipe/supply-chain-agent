@@ -1,0 +1,9 @@
+{
+  "question": "¿Y si limitamos la red a 4 CDs como máximo?",
+  "interpretation": "Limitar la red a 4 CDs no tiene efecto: existen 4 y hoy operan solo 3, asi que no se agregan cambios.",
+  "assumptions": [
+    "El limite de 4 CDs no es restrictivo frente a los 3 que ya operan."
+  ],
+  "unsupported": "",
+  "calls": []
+}

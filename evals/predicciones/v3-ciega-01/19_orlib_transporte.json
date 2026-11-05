@@ -1,0 +1,16 @@
+{
+  "question": "Los costos de transporte bajan 5%.",
+  "interpretation": "Todos los costos de transporte bajan 5% (factor 0.95).",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_arc_costs",
+      "input": {
+        "origin": "*",
+        "destination": "*",
+        "factor": 0.95
+      }
+    }
+  ]
+}

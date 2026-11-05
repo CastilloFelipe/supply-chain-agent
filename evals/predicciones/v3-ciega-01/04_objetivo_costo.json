@@ -1,0 +1,14 @@
+{
+  "question": "Bajemos el costo total 10% cerrando el CD de Temuco.",
+  "interpretation": "Se cierra el CD Temuco; la meta de bajar el costo total 10% es un resultado deseado.",
+  "assumptions": [],
+  "unsupported": "La meta de reducir el costo total en 10% no se puede imponer; la simulacion mostrara el efecto real del cierre en el costo.",
+  "calls": [
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD Temuco"
+      }
+    }
+  ]
+}

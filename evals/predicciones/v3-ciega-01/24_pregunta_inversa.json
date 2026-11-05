@@ -1,0 +1,15 @@
+{
+  "question": "Si el norte crece 50%, ¿cuánto tendría que crecer el CD de Antofagasta para atender toda la demanda?",
+  "interpretation": "La demanda del norte sube 50%; cuanto debe crecer el CD Antofagasta es una pregunta inversa que el modelo no resuelve directamente.",
+  "assumptions": [],
+  "unsupported": "El modelo no calcula la capacidad necesaria del CD Antofagasta (pregunta inversa); se simula el alza de demanda y la simulacion mostrara la demanda insatisfecha y la utilizacion de los CDs.",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "norte",
+        "factor": 1.5
+      }
+    }
+  ]
+}

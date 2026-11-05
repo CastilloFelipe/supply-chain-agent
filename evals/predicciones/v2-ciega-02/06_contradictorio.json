@@ -1,0 +1,34 @@
+{
+  "question": "Cerramos todos los CDs pero seguimos atendiendo a todos los clientes. ¿Se puede?",
+  "interpretation": "Se cierran los cuatro CDs; atender a todos los clientes es un resultado deseado que no se puede imponer.",
+  "assumptions": [
+    "Se cierran los 4 CDs, incluido CD Santiago, para que el optimizador no pueda abrirlo como reemplazo."
+  ],
+  "unsupported": "No se puede imponer seguir atendiendo a todos los clientes; la simulacion mostrara la demanda insatisfecha (solo algunos clientes tienen ruta directa desde plantas).",
+  "calls": [
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD Antofagasta"
+      }
+    },
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD La Serena"
+      }
+    },
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD Santiago"
+      }
+    },
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD Temuco"
+      }
+    }
+  ]
+}

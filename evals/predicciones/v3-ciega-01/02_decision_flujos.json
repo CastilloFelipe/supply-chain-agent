@@ -1,0 +1,7 @@
+{
+  "question": "¿Cómo deberíamos repartir los envíos hacia el sur?",
+  "interpretation": "Pregunta de decision sobre el reparto de flujos hacia el sur, que el optimizador ya resuelve; la solucion base es la respuesta.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": []
+}

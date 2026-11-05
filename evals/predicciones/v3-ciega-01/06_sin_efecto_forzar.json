@@ -1,0 +1,9 @@
+{
+  "question": "Supón que estamos obligados a mantener abierto el CD de Antofagasta.",
+  "interpretation": "Forzar abierto el CD Antofagasta no tiene efecto porque ya opera en la solucion base; no se agregan cambios.",
+  "assumptions": [
+    "CD Antofagasta ya esta abierto en la solucion base."
+  ],
+  "unsupported": "",
+  "calls": []
+}

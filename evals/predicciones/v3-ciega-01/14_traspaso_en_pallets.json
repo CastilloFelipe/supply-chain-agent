@@ -1,0 +1,24 @@
+{
+  "question": "La demanda del norte baja 20% y la del centro sube esa misma cantidad de pallets.",
+  "interpretation": "La demanda del norte (90 pallets) baja 20% (-18 pallets) y la del centro (75 pallets) sube esos 18 pallets, factor 93/75 = 1.24.",
+  "assumptions": [
+    "Los 18 pallets adicionales se reparten proporcionalmente entre los clientes del centro."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "norte",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "centro",
+        "factor": 1.24
+      }
+    }
+  ]
+}

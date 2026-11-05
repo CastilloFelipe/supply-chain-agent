@@ -1,0 +1,14 @@
+{
+  "question": "Opera con un máximo de 10 bodegas.",
+  "interpretation": "Se limita la red a un maximo de 10 bodegas abiertas (hoy operan 13).",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "set_max_open_depots",
+      "input": {
+        "n": 10
+      }
+    }
+  ]
+}

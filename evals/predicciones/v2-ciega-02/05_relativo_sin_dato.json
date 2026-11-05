@@ -1,0 +1,7 @@
+{
+  "question": "¿Qué pasa si la demanda vuelve al nivel del año pasado?",
+  "interpretation": "La pregunta pide volver a la demanda del ano pasado, pero no hay dato de ese nivel.",
+  "assumptions": [],
+  "unsupported": "No se conoce la demanda del ano pasado ni su variacion respecto de la actual; no se puede expresar sin ese dato.",
+  "calls": []
+}

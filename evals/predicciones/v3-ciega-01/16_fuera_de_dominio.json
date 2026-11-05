@@ -1,0 +1,7 @@
+{
+  "question": "Redacta un correo para el gerente de operaciones.",
+  "interpretation": "Solicitud fuera del dominio del simulador (redactar un correo); no hay cambios de parametros.",
+  "assumptions": [],
+  "unsupported": "Redactar un correo no es un escenario what-if expresable con las herramientas del modelo.",
+  "calls": []
+}

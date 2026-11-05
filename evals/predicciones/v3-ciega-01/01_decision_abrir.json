@@ -1,0 +1,7 @@
+{
+  "question": "¿Cuál CD nos conviene abrir?",
+  "interpretation": "Pregunta de decision (que CD abrir) que el optimizador ya resuelve; la solucion base es la respuesta (operan CD Antofagasta, CD La Serena y CD Temuco).",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": []
+}

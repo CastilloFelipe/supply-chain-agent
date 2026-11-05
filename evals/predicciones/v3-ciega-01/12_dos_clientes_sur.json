@@ -1,0 +1,24 @@
+{
+  "question": "Puerto Montt y Temuco duplican su demanda.",
+  "interpretation": "Los clientes Puerto Montt y Temuco duplican su demanda (factor 2.0 cada uno).",
+  "assumptions": [
+    "'Temuco' se interpreta como el cliente Temuco (no el CD), ya que se habla de demanda."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_customer_demand",
+      "input": {
+        "customer": "Puerto Montt",
+        "factor": 2.0
+      }
+    },
+    {
+      "name": "scale_customer_demand",
+      "input": {
+        "customer": "Temuco",
+        "factor": 2.0
+      }
+    }
+  ]
+}

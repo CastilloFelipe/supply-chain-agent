@@ -1,0 +1,17 @@
+{
+  "question": "La demanda del sur aumenta en 11 pallets semanales en total.",
+  "interpretation": "La demanda total de la region sur (55 pallets) sube 11 pallets, factor 66/55 = 1.2 aplicado proporcionalmente a sus clientes.",
+  "assumptions": [
+    "El aumento de 11 pallets se reparte proporcionalmente entre los clientes del sur (Talca, Temuco, Puerto Montt)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "sur",
+        "factor": 1.2
+      }
+    }
+  ]
+}

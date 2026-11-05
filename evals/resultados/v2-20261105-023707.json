@@ -1,0 +1,410 @@
+[
+  {
+    "id": "01_absoluto_demanda",
+    "pregunta": "La demanda de Arica sube en 10 pallets por semana. ¿Cómo impacta a la red?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.6666666667,
+        "customer": "Arica"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "02_absoluto_capacidad",
+    "pregunta": "Por una falla, la planta de Concepción pierde 40 pallets semanales de capacidad. ¿Qué pasa?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Concepcion",
+        "factor": 0.6
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "03_norte_grande",
+    "pregunta": "¿Qué pasa si la demanda del Norte Grande sube 25%?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.25,
+        "region": "norte"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "04_bodegas_del_sur",
+    "pregunta": "Cerramos todas las bodegas del sur. ¿Cómo queda la red?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "close_depot",
+        "depot": "CD Temuco"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "05_relativo_sin_dato",
+    "pregunta": "¿Qué pasa si la demanda vuelve al nivel del año pasado?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": "No se conoce la demanda del ano pasado ni su variacion respecto de la actual; no se puede expresar sin ese dato."
+  },
+  {
+    "id": "06_contradictorio",
+    "pregunta": "Cerramos todos los CDs pero seguimos atendiendo a todos los clientes. ¿Se puede?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "close_depot",
+        "depot": "CD Antofagasta"
+      },
+      {
+        "op": "close_depot",
+        "depot": "CD La Serena"
+      },
+      {
+        "op": "close_depot",
+        "depot": "CD Santiago"
+      },
+      {
+        "op": "close_depot",
+        "depot": "CD Temuco"
+      }
+    ],
+    "unsupported": "No se puede imponer seguir atendiendo a todos los clientes; la simulacion mostrara la demanda insatisfecha (solo algunos clientes tienen ruta directa desde plantas)."
+  },
+  {
+    "id": "07_pregunta_de_optimizacion",
+    "pregunta": "¿Qué CD conviene cerrar?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "08_relativo_encadenado",
+    "pregunta": "La demanda del centro crece 20% y la del sur la mitad de eso. ¿Qué pasa?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.2,
+        "region": "centro"
+      },
+      {
+        "op": "scale_demand",
+        "factor": 1.1,
+        "region": "sur"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "09_compuesto",
+    "pregunta": "La demanda del norte sube 10% este año y otro 10% el próximo. ¿Cómo queda la red el próximo año?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.21,
+        "region": "norte"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "10_capacidad_cero",
+    "pregunta": "Todo igual, salvo que la planta de Santiago no puede producir nada.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Santiago",
+        "factor": 0.0
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "11_queda_en",
+    "pregunta": "La capacidad del CD Antofagasta queda en un 80% de lo actual.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_depot_capacity",
+        "depot": "CD Antofagasta",
+        "factor": 0.8
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "12_salidas_bloqueadas",
+    "pregunta": "No pueden salir camiones del CD de Antofagasta. ¿Qué hacemos?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "block_route",
+        "origin": "CD Antofagasta",
+        "destination": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "13_tarifa_absoluta",
+    "pregunta": "El flete entre la planta de Concepción y el CD Temuco sube de 9 a 12 dólares por pallet.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_arc_costs",
+        "factor": 1.3333333333,
+        "origin": "Planta Concepcion",
+        "destination": "CD Temuco"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "14_ambiguo_temuco",
+    "pregunta": "¿Qué pasa si la demanda de Temuco cae a la mitad?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 0.5,
+        "customer": "Temuco"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "15_variable_no_modelada",
+    "pregunta": "¿Y si hacemos nearshoring y baja el lead time?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": "El modelo no representa lead times ni nearshoring (no hay nuevos proveedores ni tiempos); no se puede expresar sin datos de su efecto en costos o capacidades."
+  },
+  {
+    "id": "16_obligado_y_limite",
+    "pregunta": "Mantenemos obligatoriamente el CD Santiago, pero la red no puede tener más de 2 CDs.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "force_open_depot",
+        "depot": "CD Santiago"
+      },
+      {
+        "op": "set_max_open_depots",
+        "n": 2
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "17_orlib_combinado",
+    "pregunta": "Cierra la bodega B005 y aumenta 10% la demanda de todos los clientes.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "close_depot",
+        "depot": "B005"
+      },
+      {
+        "op": "scale_demand",
+        "factor": 1.1,
+        "region": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "18_orlib_todas_las_bodegas",
+    "pregunta": "Todas las bodegas pierden un 20% de capacidad. ¿Qué pasa?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B001",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B002",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B003",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B004",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B005",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B006",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B007",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B008",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B009",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B010",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B011",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B012",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B013",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B014",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B015",
+        "factor": 0.8
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "B016",
+        "factor": 0.8
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "19_orlib_cliente",
+    "pregunta": "El cliente C0007 duplica su demanda.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 2.0,
+        "customer": "C0007"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "20_orlib_consolidar",
+    "pregunta": "Opera con un máximo de 10 bodegas.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "set_max_open_depots",
+        "n": 10
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "21_unidad_sin_conversion",
+    "pregunta": "El diésel sube 150 pesos por litro. ¿Cómo afecta?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": "No hay datos de consumo de combustible por ruta, precio base del diesel ni tipo de cambio para convertir +150 CLP/litro en un factor sobre los costos de transporte; no se aproxima."
+  },
+  {
+    "id": "22_dos_cambios_distintos",
+    "pregunta": "Supongamos que la ruta a Arica está cortada y además el CD La Serena trabaja al 120% de su capacidad.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "block_route",
+        "origin": null,
+        "destination": "Arica"
+      },
+      {
+        "op": "scale_depot_capacity",
+        "depot": "CD La Serena",
+        "factor": 1.2
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "23_perder_region",
+    "pregunta": "Perdemos todos los clientes del sur.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 0.0,
+        "region": "sur"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "24_fuera_de_dominio",
+    "pregunta": "¿Cuál es la capital de Chile?",
+    "acierto": true,
+    "motivo": "ok (declaro algo no modelable sin necesidad)",
+    "prediccion": [],
+    "unsupported": "La pregunta no es un escenario what-if sobre la red logistica."
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "question": "Supongamos que la ruta a Arica está cortada y además el CD La Serena trabaja al 120% de su capacidad.",
+  "interpretation": "Se bloquea la ruta hacia Arica y la capacidad del CD La Serena pasa a 120% de la actual.",
+  "assumptions": [
+    "'Ruta a Arica' se interpreta como todas las rutas que llegan al cliente Arica (solo CD Antofagasta -> Arica).",
+    "'Trabaja al 120% de su capacidad' se interpreta como capacidad efectiva 1.2 veces la actual."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "block_route",
+      "input": {
+        "origin": "*",
+        "destination": "Arica"
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "CD La Serena",
+        "factor": 1.2
+      }
+    }
+  ]
+}

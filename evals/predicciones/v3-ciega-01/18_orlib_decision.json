@@ -1,0 +1,7 @@
+{
+  "question": "¿Qué bodegas conviene abrir?",
+  "interpretation": "Pregunta de decision (que bodegas abrir) que el optimizador ya resuelve; la solucion base es la respuesta.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": []
+}

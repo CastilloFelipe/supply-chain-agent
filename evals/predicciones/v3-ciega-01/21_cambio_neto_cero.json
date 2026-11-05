@@ -1,0 +1,9 @@
+{
+  "question": "La planta de Concepción baja su capacidad a la mitad, pero luego recupera todo lo perdido.",
+  "interpretation": "La capacidad de la Planta Concepcion baja a la mitad y luego se recupera por completo: el cambio neto es nulo, asi que no se agregan cambios.",
+  "assumptions": [
+    "Se modela el estado final (capacidad igual a la base)."
+  ],
+  "unsupported": "",
+  "calls": []
+}

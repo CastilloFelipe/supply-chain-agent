@@ -1,0 +1,15 @@
+{
+  "question": "La capacidad del CD La Serena se iguala a la del CD Antofagasta.",
+  "interpretation": "La capacidad del CD La Serena (50) pasa a igualar la del CD Antofagasta (70), factor 70/50 = 1.4.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "CD La Serena",
+        "factor": 1.4
+      }
+    }
+  ]
+}

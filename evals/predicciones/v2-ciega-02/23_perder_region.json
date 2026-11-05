@@ -1,0 +1,15 @@
+{
+  "question": "Perdemos todos los clientes del sur.",
+  "interpretation": "La demanda de todos los clientes de la region sur cae a cero (factor 0).",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "sur",
+        "factor": 0.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+[
+  {
+    "id": "01_decision_abrir",
+    "pregunta": "¿Cuál CD nos conviene abrir?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "02_decision_flujos",
+    "pregunta": "¿Cómo deberíamos repartir los envíos hacia el sur?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "03_objetivo_sin_quiebres",
+    "pregunta": "Si la demanda del norte sube 30%, ¿cómo atendemos a todos sin quiebres?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.3,
+        "region": "norte"
+      }
+    ],
+    "unsupported": "No se puede imponer como restriccion atender a todos sin quiebres; la simulacion mostrara si hay demanda insatisfecha."
+  },
+  {
+    "id": "04_objetivo_costo",
+    "pregunta": "Bajemos el costo total 10% cerrando el CD de Temuco.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "close_depot",
+        "depot": "CD Temuco"
+      }
+    ],
+    "unsupported": "La meta de reducir el costo total en 10% no se puede imponer; la simulacion mostrara el efecto real del cierre en el costo."
+  },
+  {
+    "id": "05_sin_efecto_limite",
+    "pregunta": "¿Y si limitamos la red a 4 CDs como máximo?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "06_sin_efecto_forzar",
+    "pregunta": "Supón que estamos obligados a mantener abierto el CD de Antofagasta.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "07_cerrar_ya_cerrado",
+    "pregunta": "¿Qué pasa si cerramos el CD de Santiago?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "08_absoluto_costo_fijo",
+    "pregunta": "El arriendo del CD Temuco sube de 7.000 a 8.400 dólares.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_depot_fixed_cost",
+        "factor": 1.2,
+        "depot": "CD Temuco"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "09_absoluto_region",
+    "pregunta": "La demanda del sur aumenta en 11 pallets semanales en total.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.2,
+        "region": "sur"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "10_absoluto_planta",
+    "pregunta": "La capacidad de la planta de Santiago aumenta en 20 pallets.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Santiago",
+        "factor": 1.1333333333
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "11_lugar_inexistente",
+    "pregunta": "La demanda de la capital sube 15%.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": "No hay un cliente ni region 'capital'/Santiago en el modelo (los clientes del centro son La Serena, Valparaiso y Rancagua); no se aproxima con otra region."
+  },
+  {
+    "id": "12_dos_clientes_sur",
+    "pregunta": "Puerto Montt y Temuco duplican su demanda.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 2.0,
+        "customer": "Puerto Montt"
+      },
+      {
+        "op": "scale_demand",
+        "factor": 2.0,
+        "customer": "Temuco"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "13_planta_aislada",
+    "pregunta": "Se cortan todas las rutas que salen de la planta de Concepción.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "block_route",
+        "origin": "Planta Concepcion",
+        "destination": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "14_traspaso_en_pallets",
+    "pregunta": "La demanda del norte baja 20% y la del centro sube esa misma cantidad de pallets.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 0.8,
+        "region": "norte"
+      },
+      {
+        "op": "scale_demand",
+        "factor": 1.24,
+        "region": "centro"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "15_inflacion_compuesta",
+    "pregunta": "Con una inflación de 5% anual, ¿cómo quedan los costos de transporte en 2 años?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_arc_costs",
+        "factor": 1.1025,
+        "origin": null,
+        "destination": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "16_fuera_de_dominio",
+    "pregunta": "Redacta un correo para el gerente de operaciones.",
+    "acierto": true,
+    "motivo": "ok (declaro algo no modelable sin necesidad)",
+    "prediccion": [],
+    "unsupported": "Redactar un correo no es un escenario what-if expresable con las herramientas del modelo."
+  },
+  {
+    "id": "17_orlib_tres_cierres",
+    "pregunta": "Cierra las bodegas B001, B002 y B003.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "close_depot",
+        "depot": "B001"
+      },
+      {
+        "op": "close_depot",
+        "depot": "B002"
+      },
+      {
+        "op": "close_depot",
+        "depot": "B003"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "18_orlib_decision",
+    "pregunta": "¿Qué bodegas conviene abrir?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "19_orlib_transporte",
+    "pregunta": "Los costos de transporte bajan 5%.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_arc_costs",
+        "factor": 0.95,
+        "origin": null,
+        "destination": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "20_variable_tiempo",
+    "pregunta": "¿Qué pasa si los camiones tardan dos días más en llegar a Arica?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": "El modelo no tiene tiempos de transito ni lead times; un retraso de dos dias en llegar a Arica no se puede expresar con las herramientas."
+  },
+  {
+    "id": "21_cambio_neto_cero",
+    "pregunta": "La planta de Concepción baja su capacidad a la mitad, pero luego recupera todo lo perdido.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": ""
+  },
+  {
+    "id": "22_igualar_capacidad",
+    "pregunta": "La capacidad del CD La Serena se iguala a la del CD Antofagasta.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_depot_capacity",
+        "depot": "CD La Serena",
+        "factor": 1.4
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "23_todas_las_plantas",
+    "pregunta": "Todas las plantas producen 10% menos.",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Santiago",
+        "factor": 0.9
+      },
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Concepcion",
+        "factor": 0.9
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "24_pregunta_inversa",
+    "pregunta": "Si el norte crece 50%, ¿cuánto tendría que crecer el CD de Antofagasta para atender toda la demanda?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.5,
+        "region": "norte"
+      }
+    ],
+    "unsupported": "El modelo no calcula la capacidad necesaria del CD Antofagasta (pregunta inversa); se simula el alza de demanda y la simulacion mostrara la demanda insatisfecha y la utilizacion de los CDs."
+  }
+]
