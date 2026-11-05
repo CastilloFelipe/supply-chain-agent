@@ -1,0 +1,17 @@
+{
+  "question": "La demanda de Arica sube en 10 pallets por semana. ¿Cómo impacta a la red?",
+  "interpretation": "Arica pasa de 15 a 25 pallets/semana (+10 absolutos).",
+  "assumptions": [
+    "Arica tiene demanda base 15; +10 pallets equivale a factor 25/15 = 1.666667."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_customer_demand",
+      "input": {
+        "customer": "Arica",
+        "factor": 1.666667
+      }
+    }
+  ]
+}

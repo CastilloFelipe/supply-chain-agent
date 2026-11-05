@@ -1,0 +1,24 @@
+{
+  "question": "La demanda del centro crece 20% y la del sur la mitad de eso. ¿Qué pasa?",
+  "interpretation": "La demanda del centro sube 20% y la del sur 10%.",
+  "assumptions": [
+    "'La mitad de eso' = la mitad de 20% = 10%, factor 1.1."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "centro",
+        "factor": 1.2
+      }
+    },
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "sur",
+        "factor": 1.1
+      }
+    }
+  ]
+}

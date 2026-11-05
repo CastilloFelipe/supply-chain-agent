@@ -1,0 +1,15 @@
+{
+  "question": "La capacidad del CD Antofagasta queda en un 80% de lo actual.",
+  "interpretation": "La capacidad del CD Antofagasta queda en 80% de la actual.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "CD Antofagasta",
+        "factor": 0.8
+      }
+    }
+  ]
+}

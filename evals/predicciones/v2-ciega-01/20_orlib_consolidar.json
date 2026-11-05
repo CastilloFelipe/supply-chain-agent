@@ -1,0 +1,14 @@
+{
+  "question": "Opera con un máximo de 10 bodegas.",
+  "interpretation": "La red opera con a lo sumo 10 bodegas abiertas.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "set_max_open_depots",
+      "input": {
+        "n": 10
+      }
+    }
+  ]
+}

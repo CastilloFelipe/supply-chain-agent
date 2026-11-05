@@ -1,0 +1,18 @@
+{
+  "question": "El flete entre la planta de Concepción y el CD Temuco sube de 9 a 12 dólares por pallet.",
+  "interpretation": "El costo del arco Planta Concepcion -> CD Temuco pasa de 9 a 12 USD/pallet.",
+  "assumptions": [
+    "Factor 12/9 = 1.333333 (el costo base del arco es 9)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_arc_costs",
+      "input": {
+        "origin": "Planta Concepcion",
+        "destination": "CD Temuco",
+        "factor": 1.333333
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "question": "La demanda del norte sube 10% este año y otro 10% el próximo. ¿Cómo queda la red el próximo año?",
+  "interpretation": "La demanda del norte crece 10% dos años seguidos (compuesto).",
+  "assumptions": [
+    "Crecimiento compuesto: 1.1 x 1.1 = 1.21 sobre la demanda actual; resto de la red sin cambios."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "norte",
+        "factor": 1.21
+      }
+    }
+  ]
+}

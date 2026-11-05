@@ -66,10 +66,24 @@ python evals/run_eval.py --set v2 --api                                         
 
 | Corrida | Traductor | Aciertos |
 |---|---|---|
-| v1-ciega-01 | Claude Code, agente sin acceso a las respuestas | 22 / 22 |
+| Set | Corrida | Traductor | Aciertos |
+|---|---|---|---|
+| v1 | v1-ciega-01 | Claude Code, agente sin acceso a las respuestas | 22 / 22 (100%) |
+| v2 | v2-ciega-01 | Claude Code, agente sin acceso a las respuestas | 22 / 24 (92%) |
 
-El 100% indica que el set v1 es fácil para esta red, que es chica y trae nombres
-cerrados por `enum`. Hace falta un set v2 más exigente antes de sacar conclusiones.
+El v1 resultó fácil: la red es chica y los nombres vienen cerrados por `enum`. En el v2
+el traductor resolvió bien las conversiones absolutas (de 15 a 25 pallets es un factor
+de 1,667), el crecimiento compuesto (1,21), el "Norte Grande" y las 16 llamadas que
+exige la instancia cap41. Falló en dos casos de criterio:
+
+- **Contradicción** ("cerrar todos los CDs pero atender a todos"): cerró los CDs, pero
+  no declaró que "atender a todos" es un objetivo y no un parámetro.
+- **Pregunta de optimización** ("¿qué CD conviene cerrar?"): agregó "máximo 3 CDs"
+  cuando el caso base ya opera con 3, así que el cambio no tiene efecto. El traductor no
+  conoce la solución base y no puede darse cuenta.
+
+Las dos respuestas esperadas son discutibles y quedan documentadas, pero el puntaje no
+se ajustó después de ver los resultados.
 
 ## Validación contra la literatura
 

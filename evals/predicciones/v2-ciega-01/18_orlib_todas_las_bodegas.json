@@ -1,0 +1,122 @@
+{
+  "question": "Todas las bodegas pierden un 20% de capacidad. ¿Qué pasa?",
+  "interpretation": "Las 16 bodegas pasan a 80% de su capacidad.",
+  "assumptions": [
+    "scale_depot_capacity no admite '*', por lo que se aplica una llamada por bodega (B001-B016)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B001",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B002",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B003",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B004",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B005",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B006",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B007",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B008",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B009",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B010",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B011",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B012",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B013",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B014",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B015",
+        "factor": 0.8
+      }
+    },
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "B016",
+        "factor": 0.8
+      }
+    }
+  ]
+}

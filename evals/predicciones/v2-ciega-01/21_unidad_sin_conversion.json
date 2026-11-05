@@ -1,0 +1,7 @@
+{
+  "question": "El diésel sube 150 pesos por litro. ¿Cómo afecta?",
+  "interpretation": "Alza del diesel de 150 CLP/litro, que no se puede convertir a un factor sobre costos de flete en USD/pallet.",
+  "assumptions": [],
+  "unsupported": "El alza esta en pesos por litro y los costos de transporte del modelo estan en USD por pallet; sin tipo de cambio, consumo por pallet ni participacion del combustible en la tarifa no es posible derivar el factor. Indique el alza porcentual del flete para usar scale_arc_costs('*','*').",
+  "calls": []
+}

@@ -1,0 +1,7 @@
+{
+  "question": "¿Qué pasa si la demanda vuelve al nivel del año pasado?",
+  "interpretation": "Volver la demanda al nivel del año pasado, dato que el modelo no tiene.",
+  "assumptions": [],
+  "unsupported": "No se conoce la demanda del año pasado ni su variacion respecto a la actual, por lo que no se puede calcular el factor. Indique el cambio porcentual (p.ej. 'la demanda baja 10%').",
+  "calls": []
+}

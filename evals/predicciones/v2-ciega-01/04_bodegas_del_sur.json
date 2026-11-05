@@ -1,0 +1,16 @@
+{
+  "question": "Cerramos todas las bodegas del sur. ¿Cómo queda la red?",
+  "interpretation": "Se cierran todos los CDs de la region sur.",
+  "assumptions": [
+    "El unico CD de la region sur es CD Temuco; las plantas no se consideran bodegas."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD Temuco"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "question": "¿Qué pasa si la demanda del Norte Grande sube 25%?",
+  "interpretation": "La demanda de los clientes del Norte Grande (Arica, Iquique, Calama, Antofagasta) sube 25%.",
+  "assumptions": [
+    "Norte Grande = Arica, Iquique, Calama y Antofagasta, que coinciden exactamente con los clientes de la region 'norte' del modelo (La Serena esta en 'centro')."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "norte",
+        "factor": 1.25
+      }
+    }
+  ]
+}

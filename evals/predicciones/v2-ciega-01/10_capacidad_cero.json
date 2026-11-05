@@ -1,0 +1,17 @@
+{
+  "question": "Todo igual, salvo que la planta de Santiago no puede producir nada.",
+  "interpretation": "Planta Santiago queda sin capacidad de produccion.",
+  "assumptions": [
+    "'La planta de Santiago' = Planta Santiago (no el CD Santiago)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Santiago",
+        "factor": 0.0
+      }
+    }
+  ]
+}

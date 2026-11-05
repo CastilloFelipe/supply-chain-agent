@@ -1,0 +1,17 @@
+{
+  "question": "Perdemos todos los clientes del sur.",
+  "interpretation": "La demanda de todos los clientes de la region sur desaparece.",
+  "assumptions": [
+    "Perder los clientes = demanda 0 para Talca, Temuco y Puerto Montt (region sur)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "sur",
+        "factor": 0.0
+      }
+    }
+  ]
+}

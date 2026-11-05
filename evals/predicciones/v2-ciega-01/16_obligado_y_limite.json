@@ -1,0 +1,20 @@
+{
+  "question": "Mantenemos obligatoriamente el CD Santiago, pero la red no puede tener más de 2 CDs.",
+  "interpretation": "CD Santiago se mantiene abierto obligatoriamente y se permiten como maximo 2 CDs abiertos.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "force_open_depot",
+      "input": {
+        "depot": "CD Santiago"
+      }
+    },
+    {
+      "name": "set_max_open_depots",
+      "input": {
+        "n": 2
+      }
+    }
+  ]
+}

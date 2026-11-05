@@ -1,0 +1,7 @@
+{
+  "question": "¿Cuál es la capital de Chile?",
+  "interpretation": "Pregunta fuera del dominio de la red logistica.",
+  "assumptions": [],
+  "unsupported": "La pregunta no trata sobre la red logistica ni sobre ningun parametro del modelo; no hay escenario que simular.",
+  "calls": []
+}

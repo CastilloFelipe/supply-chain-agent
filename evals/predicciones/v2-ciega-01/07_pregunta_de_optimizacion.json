@@ -1,0 +1,16 @@
+{
+  "question": "¿Qué CD conviene cerrar?",
+  "interpretation": "Determinar que CD conviene cerrar dejando que el optimizador elija operar con un CD menos.",
+  "assumptions": [
+    "Se interpreta como cerrar exactamente uno: se limita a 3 CDs abiertos (hoy hay 4) y el optimizador decide cual cerrar."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "set_max_open_depots",
+      "input": {
+        "n": 3
+      }
+    }
+  ]
+}

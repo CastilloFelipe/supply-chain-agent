@@ -1,0 +1,7 @@
+{
+  "question": "¿Y si hacemos nearshoring y baja el lead time?",
+  "interpretation": "Nearshoring con reduccion de lead time, variable que el modelo no representa.",
+  "assumptions": [],
+  "unsupported": "El modelo no tiene lead times ni proveedores/origenes de abastecimiento; el nearshoring y la baja de lead time no se pueden expresar con las herramientas disponibles.",
+  "calls": []
+}

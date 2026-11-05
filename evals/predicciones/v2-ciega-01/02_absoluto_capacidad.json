@@ -1,0 +1,17 @@
+{
+  "question": "Por una falla, la planta de Concepción pierde 40 pallets semanales de capacidad. ¿Qué pasa?",
+  "interpretation": "Planta Concepcion pasa de 100 a 60 pallets/semana de capacidad.",
+  "assumptions": [
+    "Capacidad base 100; perder 40 equivale a factor 60/100 = 0.6."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Concepcion",
+        "factor": 0.6
+      }
+    }
+  ]
+}
