@@ -1,0 +1,24 @@
+{
+  "question": "¿Qué pasa con el costo de transporte si la fábrica de Santiago reduce su capacidad a la mitad y la demanda en el norte aumenta un 20%?",
+  "interpretation": "Planta Santiago a la mitad de capacidad y demanda del norte +20%.",
+  "assumptions": [
+    "'La fabrica de Santiago' se interpreta como la Planta Santiago (no el CD Santiago)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Santiago",
+        "factor": 0.5
+      }
+    },
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "norte",
+        "factor": 1.2
+      }
+    }
+  ]
+}

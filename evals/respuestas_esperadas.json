@@ -1,0 +1,36 @@
+{
+  "_nota": "NO mostrar este archivo a quien traduce. Cada caso lista una o mas respuestas aceptables (operaciones en formato scenario.apply_operations). unsupported=true exige que se declare algo no modelable.",
+  "01_combinado_base": {"aceptables": [[
+    {"op": "scale_factory_capacity", "factory": "Planta Santiago", "factor": 0.5},
+    {"op": "scale_demand", "factor": 1.2, "region": "norte"}]]},
+  "02_diesel": {"aceptables": [[
+    {"op": "scale_arc_costs", "factor": 1.15, "origin": null, "destination": null}]]},
+  "03_cierre_cd": {"aceptables": [
+    [{"op": "close_depot", "depot": "CD La Serena"}],
+    [{"op": "scale_depot_capacity", "depot": "CD La Serena", "factor": 0.0}]]},
+  "04_consolidacion": {"aceptables": [[{"op": "set_max_open_depots", "n": 2}]]},
+  "05_corte_ruta_cliente": {"aceptables": [[{"op": "block_route", "origin": null, "destination": "Arica"}]]},
+  "06_arriendos": {"aceptables": [[{"op": "scale_depot_fixed_cost", "factor": 1.1, "depot": null}]]},
+  "07_demanda_total_baja": {"aceptables": [[{"op": "scale_demand", "factor": 0.85, "region": null}]]},
+  "08_duplicar_planta": {"aceptables": [[{"op": "scale_factory_capacity", "factory": "Planta Concepcion", "factor": 2.0}]]},
+  "09_demanda_cliente": {"aceptables": [[{"op": "scale_demand", "factor": 1.5, "customer": "Valparaiso"}]]},
+  "10_huelga": {"aceptables": [
+    [{"op": "close_depot", "depot": "CD Temuco"}],
+    [{"op": "scale_depot_capacity", "depot": "CD Temuco", "factor": 0.0}]]},
+  "11_cd_obligado": {"aceptables": [[{"op": "force_open_depot", "depot": "CD Santiago"}]]},
+  "12_ampliar_cd": {"aceptables": [[{"op": "scale_depot_capacity", "depot": "CD Antofagasta", "factor": 1.3}]]},
+  "13_ambiguo_santiago": {"aceptables": [[{"op": "scale_factory_capacity", "factory": "Planta Santiago", "factor": 0.75}]]},
+  "14_peaje_origen": {"aceptables": [[{"op": "scale_arc_costs", "factor": 1.2, "origin": "Planta Santiago", "destination": null}]]},
+  "15_combinado_sur": {"aceptables": [
+    [{"op": "scale_demand", "factor": 1.1, "region": "sur"}, {"op": "close_depot", "depot": "CD Temuco"}],
+    [{"op": "scale_demand", "factor": 1.1, "region": "sur"}, {"op": "scale_depot_capacity", "depot": "CD Temuco", "factor": 0.0}]]},
+  "16_black_friday": {"aceptables": [[{"op": "scale_demand", "factor": 3.0, "region": "centro"}]]},
+  "17_corte_tramo": {"aceptables": [[{"op": "block_route", "origin": "CD Antofagasta", "destination": "Calama"}]]},
+  "18_un_solo_cd": {"aceptables": [[{"op": "set_max_open_depots", "n": 1}]]},
+  "19_no_modelable": {"aceptables": [[]], "unsupported": true},
+  "20_parcial_no_modelable": {"aceptables": [[{"op": "scale_demand", "factor": 0.9, "region": "norte"}]], "unsupported": true},
+  "21_trampa_porcentaje": {"aceptables": [[{"op": "scale_factory_capacity", "factory": "Planta Concepcion", "factor": 0.7}]]},
+  "22_dos_clientes": {"aceptables": [[
+    {"op": "scale_demand", "factor": 0.5, "customer": "Iquique"},
+    {"op": "scale_demand", "factor": 1.3333, "customer": "Arica"}]]}
+}

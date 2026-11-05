@@ -1,0 +1,16 @@
+{
+  "question": "Hay huelga indefinida en el CD de Temuco. ¿Qué hacemos?",
+  "interpretation": "Cierre total del CD Temuco por huelga indefinida.",
+  "assumptions": [
+    "Huelga indefinida se modela como cierre total del CD."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD Temuco"
+      }
+    }
+  ]
+}

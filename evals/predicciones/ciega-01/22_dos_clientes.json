@@ -1,0 +1,24 @@
+{
+  "question": "La demanda de Iquique se reduce a la mitad y la de Arica sube un tercio. ¿Cómo queda la red?",
+  "interpretation": "Demanda de Iquique a la mitad y de Arica +1/3.",
+  "assumptions": [
+    "'Sube un tercio' = factor 4/3 (~1.3333)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_customer_demand",
+      "input": {
+        "customer": "Iquique",
+        "factor": 0.5
+      }
+    },
+    {
+      "name": "scale_customer_demand",
+      "input": {
+        "customer": "Arica",
+        "factor": 1.3333
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "question": "¿Qué pasa si cerramos el centro de distribución de La Serena?",
+  "interpretation": "Cierre total del CD La Serena.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD La Serena"
+      }
+    }
+  ]
+}

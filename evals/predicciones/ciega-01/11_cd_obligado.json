@@ -1,0 +1,14 @@
+{
+  "question": "Tenemos un contrato que nos obliga a mantener operando el CD de Santiago. ¿Cuánto nos cuesta eso?",
+  "interpretation": "Forzar que el CD Santiago se mantenga abierto.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "force_open_depot",
+      "input": {
+        "depot": "CD Santiago"
+      }
+    }
+  ]
+}

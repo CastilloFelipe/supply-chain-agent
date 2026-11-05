@@ -1,0 +1,15 @@
+{
+  "question": "Se cortó el camino entre el CD de Antofagasta y Calama. ¿Cómo se reorganiza la red?",
+  "interpretation": "Bloquear la ruta CD Antofagasta -> Calama.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "block_route",
+      "input": {
+        "origin": "CD Antofagasta",
+        "destination": "Calama"
+      }
+    }
+  ]
+}

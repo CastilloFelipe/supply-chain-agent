@@ -1,0 +1,14 @@
+{
+  "question": "¿Y si operáramos con un único centro de distribución?",
+  "interpretation": "Limitar a un maximo de 1 CD abierto.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "set_max_open_depots",
+      "input": {
+        "n": 1
+      }
+    }
+  ]
+}

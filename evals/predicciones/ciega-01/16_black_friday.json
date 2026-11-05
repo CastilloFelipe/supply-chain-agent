@@ -1,0 +1,15 @@
+{
+  "question": "Para el Black Friday la demanda de la zona centro se triplica. ¿Aguanta la red?",
+  "interpretation": "Demanda de la region centro x3.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "centro",
+        "factor": 3.0
+      }
+    }
+  ]
+}

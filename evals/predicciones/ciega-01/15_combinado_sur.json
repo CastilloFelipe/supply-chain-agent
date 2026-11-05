@@ -1,0 +1,21 @@
+{
+  "question": "Si la demanda del sur crece 10% y además cerramos el CD de Temuco, ¿qué pasa?",
+  "interpretation": "Demanda del sur +10% y cierre del CD Temuco.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "sur",
+        "factor": 1.1
+      }
+    },
+    {
+      "name": "close_depot",
+      "input": {
+        "depot": "CD Temuco"
+      }
+    }
+  ]
+}

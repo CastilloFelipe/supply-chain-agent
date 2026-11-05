@@ -1,0 +1,7 @@
+{
+  "question": "¿Qué pasa si abrimos un nuevo CD en Copiapó?",
+  "interpretation": "Abrir un CD nuevo en Copiapo, que no existe en la red.",
+  "assumptions": [],
+  "unsupported": "No existe herramienta para crear un CD nuevo (Copiapo no esta en la red); solo se pueden modificar, cerrar o forzar CDs existentes.",
+  "calls": []
+}

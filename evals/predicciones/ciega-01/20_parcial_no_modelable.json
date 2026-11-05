@@ -1,0 +1,15 @@
+{
+  "question": "¿Qué pasa si sube el tipo de cambio y además la demanda del norte baja 10%?",
+  "interpretation": "Demanda del norte -10%; el alza del tipo de cambio no es modelable.",
+  "assumptions": [],
+  "unsupported": "El tipo de cambio no es un parametro del modelo y no se sabe como afectaria costos o demanda; no se aproxima.",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "norte",
+        "factor": 0.9
+      }
+    }
+  ]
+}

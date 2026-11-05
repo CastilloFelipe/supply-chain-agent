@@ -1,0 +1,15 @@
+{
+  "question": "¿Qué pasa si se reduce en un 30% la capacidad de la planta de Concepción?",
+  "interpretation": "Capacidad de la Planta Concepcion -30%.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Concepcion",
+        "factor": 0.7
+      }
+    }
+  ]
+}

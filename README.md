@@ -46,6 +46,26 @@ Pregunta (lenguaje natural)
 └── docs/                       # Notas de diseño y formulación
 ```
 
+## Evaluación del traductor
+
+`evals/` tiene 22 preguntas de negocio con sus traducciones correctas. Incluye casos
+ambiguos ("la producción en Santiago"), trampas de porcentaje ("se reduce en 30%" es
+0,7 y no 0,3) y preguntas no modelables, donde el traductor debe declararlo en vez
+de aproximar. Las preguntas (`preguntas.json`) están separadas de las respuestas
+(`respuestas_esperadas.json`) para que la traducción se haga a ciegas.
+
+```bash
+python evals/run_eval.py --predicciones evals/predicciones/ciega-01   # traducciones de Claude Code
+python evals/run_eval.py --api                                       # traductor con API
+```
+
+| Corrida | Traductor | Aciertos |
+|---|---|---|
+| ciega-01 | Claude Code, agente sin acceso a las respuestas | 22 / 22 |
+
+El 100% indica que el set v1 es fácil para esta red, que es chica y trae nombres
+cerrados por `enum`. Hace falta un set v2 más exigente antes de sacar conclusiones.
+
 ## Validación contra la literatura
 
 El modelo se valida con las instancias de *Capacitated Warehouse Location* de la

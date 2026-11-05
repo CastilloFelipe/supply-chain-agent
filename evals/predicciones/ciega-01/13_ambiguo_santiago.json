@@ -1,0 +1,17 @@
+{
+  "question": "¿Y si la producción en Santiago baja un 25%?",
+  "interpretation": "Capacidad de produccion de la Planta Santiago -25%.",
+  "assumptions": [
+    "'Produccion en Santiago' se interpreta como la Planta Santiago (el CD no produce)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Santiago",
+        "factor": 0.75
+      }
+    }
+  ]
+}

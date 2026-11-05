@@ -1,0 +1,17 @@
+{
+  "question": "Se cortó la carretera y no podemos llegar a Arica. ¿Cuál es el impacto?",
+  "interpretation": "Bloquear todas las rutas que llegan al cliente Arica.",
+  "assumptions": [
+    "Se bloquean todas las rutas con destino Arica (no se puede llegar por ningun camino)."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "block_route",
+      "input": {
+        "origin": "*",
+        "destination": "Arica"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "question": "¿Qué pasa si ampliamos la capacidad del CD de Antofagasta en un 30%?",
+  "interpretation": "Capacidad del CD Antofagasta +30%.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_depot_capacity",
+      "input": {
+        "depot": "CD Antofagasta",
+        "factor": 1.3
+      }
+    }
+  ]
+}

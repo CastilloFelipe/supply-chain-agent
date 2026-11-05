@@ -1,0 +1,17 @@
+{
+  "question": "Los arriendos de todas las bodegas suben un 10%. ¿Qué pasa?",
+  "interpretation": "Costo fijo de todos los CDs +10%.",
+  "assumptions": [
+    "'Bodegas' se interpreta como los CDs y el arriendo como su costo fijo."
+  ],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_depot_fixed_cost",
+      "input": {
+        "depot": "*",
+        "factor": 1.1
+      }
+    }
+  ]
+}

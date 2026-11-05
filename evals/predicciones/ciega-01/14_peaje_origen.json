@@ -1,0 +1,16 @@
+{
+  "question": "Un peaje nuevo encarece en 20% todos los envíos que salen de la planta de Santiago. ¿Impacto?",
+  "interpretation": "Costos de todos los envios que salen de la Planta Santiago +20%.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_arc_costs",
+      "input": {
+        "origin": "Planta Santiago",
+        "destination": "*",
+        "factor": 1.2
+      }
+    }
+  ]
+}

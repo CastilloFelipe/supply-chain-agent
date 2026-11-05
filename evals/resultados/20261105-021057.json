@@ -1,0 +1,315 @@
+[
+  {
+    "id": "01_combinado_base",
+    "pregunta": "¿Qué pasa con el costo de transporte si la fábrica de Santiago reduce su capacidad a la mitad y la demanda en el norte aumenta un 20%?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Santiago",
+        "factor": 0.5
+      },
+      {
+        "op": "scale_demand",
+        "factor": 1.2,
+        "region": "norte"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "02_diesel",
+    "pregunta": "¿Cómo afecta a la red un alza de 15% en el precio del diésel?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_arc_costs",
+        "factor": 1.15,
+        "origin": null,
+        "destination": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "03_cierre_cd",
+    "pregunta": "¿Qué pasa si cerramos el centro de distribución de La Serena?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "close_depot",
+        "depot": "CD La Serena"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "04_consolidacion",
+    "pregunta": "¿Conviene consolidar la operación en máximo dos centros de distribución?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "set_max_open_depots",
+        "n": 2
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "05_corte_ruta_cliente",
+    "pregunta": "Se cortó la carretera y no podemos llegar a Arica. ¿Cuál es el impacto?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "block_route",
+        "origin": null,
+        "destination": "Arica"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "06_arriendos",
+    "pregunta": "Los arriendos de todas las bodegas suben un 10%. ¿Qué pasa?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_depot_fixed_cost",
+        "factor": 1.1,
+        "depot": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "07_demanda_total_baja",
+    "pregunta": "Si entramos en recesión y la demanda total cae 15%, ¿cómo cambia la red?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 0.85,
+        "region": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "08_duplicar_planta",
+    "pregunta": "¿Qué ganamos si duplicamos la capacidad de la planta de Concepción?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Concepcion",
+        "factor": 2.0
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "09_demanda_cliente",
+    "pregunta": "Valparaíso firmó un contrato nuevo y su demanda sube 50%. ¿Podemos atenderla?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.5,
+        "customer": "Valparaiso"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "10_huelga",
+    "pregunta": "Hay huelga indefinida en el CD de Temuco. ¿Qué hacemos?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "close_depot",
+        "depot": "CD Temuco"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "11_cd_obligado",
+    "pregunta": "Tenemos un contrato que nos obliga a mantener operando el CD de Santiago. ¿Cuánto nos cuesta eso?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "force_open_depot",
+        "depot": "CD Santiago"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "12_ampliar_cd",
+    "pregunta": "¿Qué pasa si ampliamos la capacidad del CD de Antofagasta en un 30%?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_depot_capacity",
+        "depot": "CD Antofagasta",
+        "factor": 1.3
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "13_ambiguo_santiago",
+    "pregunta": "¿Y si la producción en Santiago baja un 25%?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Santiago",
+        "factor": 0.75
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "14_peaje_origen",
+    "pregunta": "Un peaje nuevo encarece en 20% todos los envíos que salen de la planta de Santiago. ¿Impacto?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_arc_costs",
+        "factor": 1.2,
+        "origin": "Planta Santiago",
+        "destination": null
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "15_combinado_sur",
+    "pregunta": "Si la demanda del sur crece 10% y además cerramos el CD de Temuco, ¿qué pasa?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 1.1,
+        "region": "sur"
+      },
+      {
+        "op": "close_depot",
+        "depot": "CD Temuco"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "16_black_friday",
+    "pregunta": "Para el Black Friday la demanda de la zona centro se triplica. ¿Aguanta la red?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 3.0,
+        "region": "centro"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "17_corte_tramo",
+    "pregunta": "Se cortó el camino entre el CD de Antofagasta y Calama. ¿Cómo se reorganiza la red?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "block_route",
+        "origin": "CD Antofagasta",
+        "destination": "Calama"
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "18_un_solo_cd",
+    "pregunta": "¿Y si operáramos con un único centro de distribución?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "set_max_open_depots",
+        "n": 1
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "19_no_modelable",
+    "pregunta": "¿Qué pasa si abrimos un nuevo CD en Copiapó?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [],
+    "unsupported": "No existe herramienta para crear un CD nuevo (Copiapo no esta en la red); solo se pueden modificar, cerrar o forzar CDs existentes."
+  },
+  {
+    "id": "20_parcial_no_modelable",
+    "pregunta": "¿Qué pasa si sube el tipo de cambio y además la demanda del norte baja 10%?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 0.9,
+        "region": "norte"
+      }
+    ],
+    "unsupported": "El tipo de cambio no es un parametro del modelo y no se sabe como afectaria costos o demanda; no se aproxima."
+  },
+  {
+    "id": "21_trampa_porcentaje",
+    "pregunta": "¿Qué pasa si se reduce en un 30% la capacidad de la planta de Concepción?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_factory_capacity",
+        "factory": "Planta Concepcion",
+        "factor": 0.7
+      }
+    ],
+    "unsupported": ""
+  },
+  {
+    "id": "22_dos_clientes",
+    "pregunta": "La demanda de Iquique se reduce a la mitad y la de Arica sube un tercio. ¿Cómo queda la red?",
+    "acierto": true,
+    "motivo": "ok",
+    "prediccion": [
+      {
+        "op": "scale_demand",
+        "factor": 0.5,
+        "customer": "Iquique"
+      },
+      {
+        "op": "scale_demand",
+        "factor": 1.3333,
+        "customer": "Arica"
+      }
+    ],
+    "unsupported": ""
+  }
+]

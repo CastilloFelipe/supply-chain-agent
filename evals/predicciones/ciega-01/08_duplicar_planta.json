@@ -1,0 +1,15 @@
+{
+  "question": "¿Qué ganamos si duplicamos la capacidad de la planta de Concepción?",
+  "interpretation": "Duplicar la capacidad de la Planta Concepcion.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_factory_capacity",
+      "input": {
+        "factory": "Planta Concepcion",
+        "factor": 2.0
+      }
+    }
+  ]
+}

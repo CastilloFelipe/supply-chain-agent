@@ -1,0 +1,15 @@
+{
+  "question": "Si entramos en recesión y la demanda total cae 15%, ¿cómo cambia la red?",
+  "interpretation": "Demanda de toda la red -15%.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "scale_demand",
+      "input": {
+        "region": "*",
+        "factor": 0.85
+      }
+    }
+  ]
+}

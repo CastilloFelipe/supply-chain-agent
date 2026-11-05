@@ -1,0 +1,14 @@
+{
+  "question": "¿Conviene consolidar la operación en máximo dos centros de distribución?",
+  "interpretation": "Limitar a un maximo de 2 CDs abiertos.",
+  "assumptions": [],
+  "unsupported": "",
+  "calls": [
+    {
+      "name": "set_max_open_depots",
+      "input": {
+        "n": 2
+      }
+    }
+  ]
+}
