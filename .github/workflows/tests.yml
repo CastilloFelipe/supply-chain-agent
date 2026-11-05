@@ -1,0 +1,24 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+      # gurobipy trae una licencia restringida (2000 variables): alcanza para los tests.
+      # Los que necesitan licencia completa (cap131) se saltan solos.
+      - name: Tests
+        run: pytest -q
+      - name: Benchmark del set de evaluación v1 (predicciones guardadas)
+        run: python evals/run_eval.py --set v1 --predicciones evals/predicciones/v1-ciega-01
