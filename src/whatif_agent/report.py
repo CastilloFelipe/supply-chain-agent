@@ -192,8 +192,14 @@ def write_report(
         raise ReportError("Reporte truncado (max_tokens).")
 
     narrative = "\n".join(b.text for b in response.content if b.type == "text").strip()
+    return compose_report(question, narrative, cmp, units)
+
+
+def compose_report(question: str, narrative: str, cmp: dict, units: dict | None = None) -> str:
+    """Une la narrativa (escrita por un LLM) con la tabla de cifras (generada en codigo)."""
+    narrative = narrative.strip()
     if not narrative:
-        raise ReportError("El modelo no devolvio texto.")
+        raise ReportError("La narrativa del reporte esta vacia.")
     return (
         f"# Reporte what-if\n\n**Pregunta:** {question}\n\n{narrative}\n\n"
         f"## Cifras (calculadas por el optimizador)\n\n{summary_table(cmp, units)}\n"

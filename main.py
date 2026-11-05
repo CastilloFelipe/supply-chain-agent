@@ -3,6 +3,8 @@
 Uso:
     python main.py                           # caso base + escenario de ejemplo (sin LLM)
     python main.py --pregunta "..."          # traduce la pregunta con Claude (requiere ANTHROPIC_API_KEY)
+    python main.py --catalogo                # herramientas validas para esta red (para traducir sin API)
+    python main.py --escenario esc.json      # escenario ya traducido (p.ej. por Claude Code, sin API)
     python main.py --verbose                 # muestra el log de Gurobi
 """
 
@@ -69,13 +71,26 @@ def main() -> None:
     parser.add_argument("--verbose", action="store_true", help="Mostrar log de Gurobi")
     parser.add_argument("--pregunta", help="Pregunta what-if en lenguaje natural (usa Claude)")
     parser.add_argument("--datos", default=str(BASE_DATA), help="JSON de la red (por defecto, caso base)")
+    parser.add_argument("--catalogo", action="store_true", help="Imprime las herramientas validas y sale")
+    parser.add_argument("--escenario", help="JSON con un escenario ya traducido (no usa la API)")
     args = parser.parse_args()
 
     base_data = load_network(args.datos)
+    if args.catalogo:
+        from whatif_agent.offline import catalog
+
+        print(json.dumps(catalog(base_data), ensure_ascii=False, indent=2))
+        return
     base = solve(base_data, verbose=args.verbose)
     print_result("Caso base", base)
 
-    if args.pregunta:
+    scenario = None
+    if args.escenario:
+        from whatif_agent.offline import load_scenario
+
+        scenario = load_scenario(args.escenario, base_data)
+        operations, title = scenario.operations, f"Escenario: {scenario.interpretation or args.escenario}"
+    elif args.pregunta:
         if not (os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN")):
             sys.exit("Falta ANTHROPIC_API_KEY. Crea una en https://platform.claude.com y exportala:\n"
                      "  export ANTHROPIC_API_KEY=sk-ant-...")
@@ -94,21 +109,31 @@ def main() -> None:
 
     print_delta(base, scen)
 
+    if scenario is None:
+        return
+
+    from whatif_agent.report import compare, summary_table
+
+    cmp = compare(base, scen, base_data, scen_data)
+    units = base_data.meta.get("units")
+    out_dir = Path(__file__).parent / "outputs" / datetime.now().strftime("%Y%m%d-%H%M%S")
+    out_dir.mkdir(parents=True)
+    # Escenario + comparacion: permite re-ejecutar y auditar sin volver a llamar al LLM.
+    (out_dir / "escenario.json").write_text(
+        json.dumps({"escenario": scenario.to_dict(), "unidades": units, "comparacion": cmp},
+                   ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    (out_dir / "cifras.md").write_text(summary_table(cmp, units) + "\n", encoding="utf-8")
+
     if args.pregunta:
-        from whatif_agent.report import compare, write_report
+        from whatif_agent.report import write_report
 
         print("\nRedactando reporte ejecutivo...")
-        cmp = compare(base, scen, base_data, scen_data)
-        report = write_report(args.pregunta, cmp, scenario.to_dict(), base_data.meta.get("units"))
-        out_dir = Path(__file__).parent / "outputs" / datetime.now().strftime("%Y%m%d-%H%M%S")
-        out_dir.mkdir(parents=True)
+        report = write_report(args.pregunta, cmp, scenario.to_dict(), units)
         (out_dir / "reporte.md").write_text(report, encoding="utf-8")
-        # Escenario + comparacion: permite re-ejecutar y auditar sin volver a llamar al LLM.
-        (out_dir / "escenario.json").write_text(
-            json.dumps({"escenario": scenario.to_dict(), "comparacion": cmp}, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-        print(f"\n{report}\nGuardado en {out_dir}")
+        print(f"\n{report}")
+    print(f"\nResultados guardados en {out_dir}")
 
 
 if __name__ == "__main__":

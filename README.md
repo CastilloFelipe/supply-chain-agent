@@ -119,7 +119,22 @@ streamlit run app/streamlit_app.py
 
 ![Demo](docs/demo_mapa.png)
 
-### Preguntas en lenguaje natural
+### Sin API key: con Claude Code
+
+El repositorio incluye el skill `/what-if` (`.claude/skills/what-if/`). Al abrir el
+proyecto en Claude Code, Claude hace de traductor y de redactor usando tus créditos
+de Claude Code, y Gurobi calcula todas las cifras:
+
+```
+/what-if ¿Qué pasa si cerramos el CD de La Serena y el diésel sube 15%?
+```
+
+Por debajo usa `python main.py --catalogo` (herramientas válidas para la red),
+`python main.py --escenario <archivo.json>` (escenario ya traducido, validado con el
+mismo esquema que el modo API) y `scripts/componer_reporte.py`. Ejemplo de resultado:
+[escenario](docs/ejemplo_escenario.json) y [reporte](docs/ejemplo_reporte.md).
+
+### Con API key: preguntas en lenguaje natural
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...

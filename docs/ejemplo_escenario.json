@@ -1,0 +1,10 @@
+{
+  "question": "¿Qué pasa si cerramos el CD de La Serena y el diésel sube 15%?",
+  "interpretation": "Cierre del CD La Serena y alza de 15% en todos los costos de transporte.",
+  "assumptions": ["El alza del diésel se traslada completa (15%) al costo de todas las rutas."],
+  "unsupported": "",
+  "calls": [
+    {"name": "close_depot", "input": {"depot": "CD La Serena"}},
+    {"name": "scale_arc_costs", "input": {"origin": "*", "destination": "*", "factor": 1.15}}
+  ]
+}
