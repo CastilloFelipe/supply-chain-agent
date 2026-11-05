@@ -80,6 +80,30 @@ def build_tools(data: NetworkData) -> list[dict]:
             },
         ),
         _tool(
+            "scale_depot_fixed_cost",
+            "Multiplica el costo fijo de operar un CD (arriendo, personal), o de todos con '*'.",
+            {"depot": {"type": "string", "enum": [ALL, *depots]}, "factor": _factor("Costo nuevo / actual.")},
+        ),
+        _tool(
+            "set_max_open_depots",
+            "Limita cuantos CDs pueden operar a la vez (politica de consolidacion).",
+            {"n": {"type": "integer", "description": f"Maximo de CDs abiertos (hoy existen {len(depots)})."}},
+        ),
+        _tool(
+            "force_open_depot",
+            "Obliga a mantener un CD operando (p.ej. contrato vigente), aunque no convenga.",
+            {"depot": {"type": "string", "enum": depots}},
+        ),
+        _tool(
+            "block_route",
+            "Prohibe rutas de transporte (corte de carretera, puerto cerrado). Use '*' en origen o "
+            "destino para bloquear todas las rutas que salen de / llegan a un nodo.",
+            {
+                "origin": {"type": "string", "enum": [ALL, *origins]},
+                "destination": {"type": "string", "enum": [ALL, *destinations]},
+            },
+        ),
+        _tool(
             FINISH_TOOL,
             "Llamar UNA vez, al final, cuando todas las operaciones del escenario ya fueron aplicadas.",
             {
@@ -113,6 +137,15 @@ def tool_call_to_operation(name: str, args: dict) -> dict:
         return {
             "op": "scale_arc_costs",
             "factor": args["factor"],
+            "origin": None if args["origin"] == ALL else args["origin"],
+            "destination": None if args["destination"] == ALL else args["destination"],
+        }
+    if name == "scale_depot_fixed_cost":
+        depot = None if args["depot"] == ALL else args["depot"]
+        return {"op": name, "factor": args["factor"], "depot": depot}
+    if name == "block_route":
+        return {
+            "op": name,
             "origin": None if args["origin"] == ALL else args["origin"],
             "destination": None if args["destination"] == ALL else args["destination"],
         }

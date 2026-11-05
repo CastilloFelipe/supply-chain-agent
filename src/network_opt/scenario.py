@@ -66,6 +66,49 @@ def close_depot(data: NetworkData, depot: str) -> None:
     scale_depot_capacity(data, depot, 0.0)
 
 
+def scale_depot_fixed_cost(data: NetworkData, factor: float, depot: str | None = None) -> None:
+    """Ej.: alza de arriendos (todos los CDs) o renegociacion de un contrato (uno)."""
+    if depot is not None:
+        _require(depot, data.depots, "CD")
+    if factor < 0:
+        raise ValueError("El factor de costo fijo no puede ser negativo")
+    for d in [depot] if depot else data.depots:
+        data.depots[d]["fixed_cost"] *= factor
+
+
+def set_max_open_depots(data: NetworkData, n: int) -> None:
+    """Ej.: politica de consolidacion 'operar a lo mas N CDs'."""
+    if int(n) != n or n < 0:
+        raise ValueError(f"El maximo de CDs debe ser un entero >= 0 (recibido {n})")
+    data.max_open_depots = int(n)
+
+
+def force_open_depot(data: NetworkData, depot: str) -> None:
+    """Ej.: contrato de arriendo vigente que obliga a mantener el CD operando."""
+    _require(depot, data.depots, "CD")
+    if depot not in data.forced_open_depots:
+        data.forced_open_depots.append(depot)
+
+
+def block_route(data: NetworkData, origin: str | None = None, destination: str | None = None) -> None:
+    """Corte de ruta: prohibe los arcos que coinciden (None = cualquiera).
+
+    A diferencia de quitar el arco de los datos, un cliente que queda aislado
+    no invalida el escenario: aparece como demanda no servida.
+    """
+    hits = [
+        arc for arc in data.arcs
+        if (origin is None or arc[0] == origin) and (destination is None or arc[1] == destination)
+    ]
+    if not hits:
+        raise ValueError(f"No hay rutas que coincidan con origen={origin}, destino={destination}")
+    if origin is None and destination is None:
+        raise ValueError("Bloquear todas las rutas no es un escenario valido")
+    for arc in hits:
+        if arc not in data.blocked_arcs:
+            data.blocked_arcs.append(arc)
+
+
 # Registro de operaciones permitidas: es la "lista blanca" que vera el LLM.
 OPERATIONS = {
     "scale_factory_capacity": scale_factory_capacity,
@@ -73,6 +116,10 @@ OPERATIONS = {
     "scale_demand": scale_demand,
     "scale_arc_costs": scale_arc_costs,
     "close_depot": close_depot,
+    "scale_depot_fixed_cost": scale_depot_fixed_cost,
+    "set_max_open_depots": set_max_open_depots,
+    "force_open_depot": force_open_depot,
+    "block_route": block_route,
 }
 
 

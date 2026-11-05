@@ -98,3 +98,20 @@ def test_tool_enums_come_from_data(data):
     enum = tools["scale_factory_capacity"]["input_schema"]["properties"]["factory"]["enum"]
     assert enum == ["Planta Concepcion", "Planta Santiago"]
     assert all(t["strict"] for t in tools.values())
+
+
+def test_structural_rules_translate(data):
+    client = FakeClient(response(
+        tool_use("1", "set_max_open_depots", n=3),
+        tool_use("2", "block_route", origin="*", destination="Arica"),
+        tool_use("3", "scale_depot_fixed_cost", depot="*", factor=1.1),
+        tool_use("4", "force_open_depot", depot="CD Santiago"),
+        tool_use("5", "finish_scenario", **FINISH),
+    ))
+    s = translate("...", data, client=client)
+    assert s.operations == [
+        {"op": "set_max_open_depots", "n": 3},
+        {"op": "block_route", "origin": None, "destination": "Arica"},
+        {"op": "scale_depot_fixed_cost", "factor": 1.1, "depot": None},
+        {"op": "force_open_depot", "depot": "CD Santiago"},
+    ]

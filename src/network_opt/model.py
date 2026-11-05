@@ -24,6 +24,11 @@ Restricciones
     (3) Capacidad de CD:        sum_i x_id <= cap_d * y_d           para d en D
     (4) Demanda:                sum_i x_ic + u_c = dem_c            para c en C
 
+Reglas de escenario (opcionales, vienen en NetworkData):
+    (5) Maximo de CDs abiertos: sum_d y_d <= N
+    (6) CD forzado a abrir:     y_d = 1
+    (7) Ruta bloqueada:         x_ij = 0
+
 La holgura u_c es deliberada: en un simulador what-if, un escenario severo
 (p.ej. capacidad a la mitad) no debe devolver "INFEASIBLE" sin explicacion,
 sino "faltan N unidades en estos clientes", que es lo que el reporte ejecutivo
@@ -107,6 +112,16 @@ def build_model(
     m.addConstrs(
         (x.sum("*", c) + u[c] == data.customers[c]["demand"] for c in C), name="demand"
     )
+
+    # --- Reglas estructurales del escenario ------------------------------
+    # Cubren los cambios de *estructura* mas comunes sin ejecutar codigo
+    # generado por el LLM: el LLM las pide como herramientas (scenario.py).
+    for arc in data.blocked_arcs:
+        x[arc].UB = 0.0
+    for d in data.forced_open_depots:
+        y[d].LB = 1.0
+    if data.max_open_depots is not None:
+        m.addConstr(y.sum() <= data.max_open_depots, name="max_open_depots")
 
     # ====================================================================
     # PUNTO DE INYECCION #2 (restricciones) -- codigo generado por el LLM

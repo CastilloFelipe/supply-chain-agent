@@ -21,6 +21,10 @@ class NetworkData:
     arcs: dict[tuple[str, str], float]    # (origen, destino) -> costo unitario
     unmet_demand_penalty: float = 500.0   # costo por unidad de demanda no servida
     meta: dict = field(default_factory=dict)
+    # Reglas estructurales de escenario (se traducen a restricciones en model.py)
+    max_open_depots: int | None = None
+    forced_open_depots: list[str] = field(default_factory=list)
+    blocked_arcs: list[tuple[str, str]] = field(default_factory=list)
 
     def copy(self) -> "NetworkData":
         """Copia profunda: cada escenario what-if trabaja sobre su propia copia."""
@@ -53,6 +57,20 @@ class NetworkData:
             for name, attrs in nodes.items():
                 if attrs.get(key, -1) < 0:
                     raise ValueError(f"{kind} {name}: '{key}' falta o es negativo")
+
+        for d in self.forced_open_depots:
+            if d not in self.depots:
+                raise ValueError(f"CD forzado a abrir '{d}' no existe")
+        for arc in self.blocked_arcs:
+            if arc not in self.arcs:
+                raise ValueError(f"Ruta bloqueada {arc} no existe")
+        if self.max_open_depots is not None and self.max_open_depots < 0:
+            raise ValueError("max_open_depots no puede ser negativo")
+        if self.max_open_depots is not None and len(set(self.forced_open_depots)) > self.max_open_depots:
+            raise ValueError(
+                f"Contradiccion: {len(set(self.forced_open_depots))} CDs forzados a abrir "
+                f"pero maximo {self.max_open_depots} abiertos"
+            )
 
         unreachable = [c for c in self.customers if not any(j == c for _, j in self.arcs)]
         if unreachable:

@@ -76,6 +76,21 @@ min Σ c_ij·x_ij + Σ fix_d·y_d + P·Σ u_c
 - Capacidad de CD (si opera): Σ_i x_id ≤ cap_d·y_d
 - Demanda: Σ_i x_ic + u_c = dem_c
 
+Reglas opcionales de escenario: máximo de CDs abiertos (Σ y_d ≤ N), CD obligado a
+operar (y_d = 1) y ruta bloqueada (x_ij = 0).
+
+### Qué puede preguntar el usuario
+
+| Tipo de cambio | Ejemplo de pregunta |
+|---|---|
+| Capacidad de planta o CD | "¿Y si la planta de Santiago produce a la mitad?" |
+| Demanda por región o cliente | "¿Y si la demanda del norte sube 20%?" |
+| Costos de transporte | "¿Y si el diésel sube 15%?" |
+| Costos fijos de CDs | "¿Y si los arriendos suben 10%?" |
+| Cierre o apertura obligada de CDs | "¿Y si cerramos La Serena pero mantenemos Santiago?" |
+| Consolidación | "¿Y si operamos máximo 2 CDs?" |
+| Cortes de ruta | "¿Y si se corta la ruta a Arica?" |
+
 `u_c` es la demanda no servida y tiene una penalización P. Gracias a ella, un escenario
 severo no termina en "INFEASIBLE": el modelo entrega cuántas unidades faltan y en qué clientes.
 
