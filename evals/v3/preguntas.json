@@ -1,0 +1,101 @@
+[
+ {
+  "id": "01_decision_abrir",
+  "pregunta": "¿Cuál CD nos conviene abrir?"
+ },
+ {
+  "id": "02_decision_flujos",
+  "pregunta": "¿Cómo deberíamos repartir los envíos hacia el sur?"
+ },
+ {
+  "id": "03_objetivo_sin_quiebres",
+  "pregunta": "Si la demanda del norte sube 30%, ¿cómo atendemos a todos sin quiebres?"
+ },
+ {
+  "id": "04_objetivo_costo",
+  "pregunta": "Bajemos el costo total 10% cerrando el CD de Temuco."
+ },
+ {
+  "id": "05_sin_efecto_limite",
+  "pregunta": "¿Y si limitamos la red a 4 CDs como máximo?"
+ },
+ {
+  "id": "06_sin_efecto_forzar",
+  "pregunta": "Supón que estamos obligados a mantener abierto el CD de Antofagasta."
+ },
+ {
+  "id": "07_cerrar_ya_cerrado",
+  "pregunta": "¿Qué pasa si cerramos el CD de Santiago?"
+ },
+ {
+  "id": "08_absoluto_costo_fijo",
+  "pregunta": "El arriendo del CD Temuco sube de 7.000 a 8.400 dólares."
+ },
+ {
+  "id": "09_absoluto_region",
+  "pregunta": "La demanda del sur aumenta en 11 pallets semanales en total."
+ },
+ {
+  "id": "10_absoluto_planta",
+  "pregunta": "La capacidad de la planta de Santiago aumenta en 20 pallets."
+ },
+ {
+  "id": "11_lugar_inexistente",
+  "pregunta": "La demanda de la capital sube 15%."
+ },
+ {
+  "id": "12_dos_clientes_sur",
+  "pregunta": "Puerto Montt y Temuco duplican su demanda."
+ },
+ {
+  "id": "13_planta_aislada",
+  "pregunta": "Se cortan todas las rutas que salen de la planta de Concepción."
+ },
+ {
+  "id": "14_traspaso_en_pallets",
+  "pregunta": "La demanda del norte baja 20% y la del centro sube esa misma cantidad de pallets."
+ },
+ {
+  "id": "15_inflacion_compuesta",
+  "pregunta": "Con una inflación de 5% anual, ¿cómo quedan los costos de transporte en 2 años?"
+ },
+ {
+  "id": "16_fuera_de_dominio",
+  "pregunta": "Redacta un correo para el gerente de operaciones."
+ },
+ {
+  "id": "17_orlib_tres_cierres",
+  "pregunta": "Cierra las bodegas B001, B002 y B003.",
+  "datos": "data/orlib/cap41.json"
+ },
+ {
+  "id": "18_orlib_decision",
+  "pregunta": "¿Qué bodegas conviene abrir?",
+  "datos": "data/orlib/cap101.json"
+ },
+ {
+  "id": "19_orlib_transporte",
+  "pregunta": "Los costos de transporte bajan 5%.",
+  "datos": "data/orlib/cap41.json"
+ },
+ {
+  "id": "20_variable_tiempo",
+  "pregunta": "¿Qué pasa si los camiones tardan dos días más en llegar a Arica?"
+ },
+ {
+  "id": "21_cambio_neto_cero",
+  "pregunta": "La planta de Concepción baja su capacidad a la mitad, pero luego recupera todo lo perdido."
+ },
+ {
+  "id": "22_igualar_capacidad",
+  "pregunta": "La capacidad del CD La Serena se iguala a la del CD Antofagasta."
+ },
+ {
+  "id": "23_todas_las_plantas",
+  "pregunta": "Todas las plantas producen 10% menos."
+ },
+ {
+  "id": "24_pregunta_inversa",
+  "pregunta": "Si el norte crece 50%, ¿cuánto tendría que crecer el CD de Antofagasta para atender toda la demanda?"
+ }
+]

@@ -1,0 +1,327 @@
+{
+ "_nota": "NO mostrar este archivo a quien traduce. Set v3: creado DESPUES de las mejoras del v2, para medirlas sin sobreajuste.",
+ "01_decision_abrir": {
+  "aceptables": [
+   []
+  ],
+  "nota": "Decision del optimizador"
+ },
+ "02_decision_flujos": {
+  "aceptables": [
+   []
+  ],
+  "nota": "Decision del optimizador"
+ },
+ "03_objetivo_sin_quiebres": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.3,
+     "region": "norte"
+    }
+   ]
+  ],
+  "unsupported": true,
+  "nota": "'sin quiebres' es un resultado deseado"
+ },
+ "04_objetivo_costo": {
+  "aceptables": [
+   [
+    {
+     "op": "close_depot",
+     "depot": "CD Temuco"
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Temuco",
+     "factor": 0.0
+    }
+   ]
+  ],
+  "unsupported": true,
+  "nota": "La meta de costo no se puede imponer"
+ },
+ "05_sin_efecto_limite": {
+  "aceptables": [
+   [],
+   [
+    {
+     "op": "set_max_open_depots",
+     "n": 4
+    }
+   ]
+  ],
+  "nota": "Ya hay 4 CDs: sin efecto. Se aceptan ambas"
+ },
+ "06_sin_efecto_forzar": {
+  "aceptables": [
+   [],
+   [
+    {
+     "op": "force_open_depot",
+     "depot": "CD Antofagasta"
+    }
+   ]
+  ],
+  "nota": "Ya opera en el caso base"
+ },
+ "07_cerrar_ya_cerrado": {
+  "aceptables": [
+   [],
+   [
+    {
+     "op": "close_depot",
+     "depot": "CD Santiago"
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD Santiago",
+     "factor": 0.0
+    }
+   ]
+  ],
+  "nota": "El optimizador ya lo deja cerrado"
+ },
+ "08_absoluto_costo_fijo": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_depot_fixed_cost",
+     "factor": 1.2,
+     "depot": "CD Temuco"
+    }
+   ]
+  ]
+ },
+ "09_absoluto_region": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.2,
+     "region": "sur"
+    }
+   ]
+  ],
+  "nota": "Sur = 15+20+20 = 55 -> 66: factor 1.2 (reparto proporcional)"
+ },
+ "10_absoluto_planta": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_factory_capacity",
+     "factory": "Planta Santiago",
+     "factor": 1.1333333333333333
+    }
+   ]
+  ]
+ },
+ "11_lugar_inexistente": {
+  "aceptables": [
+   []
+  ],
+  "unsupported": true,
+  "nota": "No hay cliente en Santiago"
+ },
+ "12_dos_clientes_sur": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 2.0,
+     "customer": "Puerto Montt"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 2.0,
+     "customer": "Temuco"
+    }
+   ]
+  ],
+  "nota": "No es toda la region sur (Talca)"
+ },
+ "13_planta_aislada": {
+  "aceptables": [
+   [
+    {
+     "op": "block_route",
+     "origin": "Planta Concepcion",
+     "destination": null
+    }
+   ],
+   [
+    {
+     "op": "scale_factory_capacity",
+     "factory": "Planta Concepcion",
+     "factor": 0.0
+    }
+   ]
+  ]
+ },
+ "14_traspaso_en_pallets": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 0.8,
+     "region": "norte"
+    },
+    {
+     "op": "scale_demand",
+     "factor": 1.24,
+     "region": "centro"
+    }
+   ]
+  ],
+  "nota": "Norte 90 -> -18; centro 75 -> 93: factor 1.24"
+ },
+ "15_inflacion_compuesta": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_arc_costs",
+     "factor": 1.1025,
+     "origin": null,
+     "destination": null
+    }
+   ],
+   [
+    {
+     "op": "scale_arc_costs",
+     "factor": 1.05,
+     "origin": null,
+     "destination": null
+    },
+    {
+     "op": "scale_arc_costs",
+     "factor": 1.05,
+     "origin": null,
+     "destination": null
+    }
+   ]
+  ]
+ },
+ "16_fuera_de_dominio": {
+  "aceptables": [
+   []
+  ]
+ },
+ "17_orlib_tres_cierres": {
+  "aceptables": [
+   [
+    {
+     "op": "close_depot",
+     "depot": "B001"
+    },
+    {
+     "op": "close_depot",
+     "depot": "B002"
+    },
+    {
+     "op": "close_depot",
+     "depot": "B003"
+    }
+   ],
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B001",
+     "factor": 0.0
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B002",
+     "factor": 0.0
+    },
+    {
+     "op": "scale_depot_capacity",
+     "depot": "B003",
+     "factor": 0.0
+    }
+   ]
+  ]
+ },
+ "18_orlib_decision": {
+  "aceptables": [
+   []
+  ]
+ },
+ "19_orlib_transporte": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_arc_costs",
+     "factor": 0.95,
+     "origin": null,
+     "destination": null
+    }
+   ]
+  ]
+ },
+ "20_variable_tiempo": {
+  "aceptables": [
+   []
+  ],
+  "unsupported": true,
+  "nota": "Tiempos no existen en el modelo"
+ },
+ "21_cambio_neto_cero": {
+  "aceptables": [
+   [],
+   [
+    {
+     "op": "scale_factory_capacity",
+     "factory": "Planta Concepcion",
+     "factor": 1.0
+    }
+   ]
+  ],
+  "nota": "Efecto neto nulo"
+ },
+ "22_igualar_capacidad": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_depot_capacity",
+     "depot": "CD La Serena",
+     "factor": 1.4
+    }
+   ]
+  ],
+  "nota": "50 -> 70"
+ },
+ "23_todas_las_plantas": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_factory_capacity",
+     "factory": "Planta Santiago",
+     "factor": 0.9
+    },
+    {
+     "op": "scale_factory_capacity",
+     "factory": "Planta Concepcion",
+     "factor": 0.9
+    }
+   ]
+  ]
+ },
+ "24_pregunta_inversa": {
+  "aceptables": [
+   [
+    {
+     "op": "scale_demand",
+     "factor": 1.5,
+     "region": "norte"
+    }
+   ]
+  ],
+  "unsupported": true,
+  "nota": "'Cuanto tendria que crecer' es una busqueda, no un parametro"
+ }
+}

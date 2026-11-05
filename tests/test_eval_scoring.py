@@ -31,7 +31,7 @@ def test_unsupported_must_be_declared():
     assert score_case([], "No hay herramienta para abrir CDs nuevos", exp)["acierto"]
 
 
-@pytest.mark.parametrize("eval_set", ["v1", "v2"])
+@pytest.mark.parametrize("eval_set", ["v1", "v2", "v3"])
 def test_expected_answers_are_valid_scenarios(eval_set):
     """Cada respuesta esperada debe ser un escenario ejecutable (evita errores en el set)."""
     folder = ROOT / "evals" / eval_set
