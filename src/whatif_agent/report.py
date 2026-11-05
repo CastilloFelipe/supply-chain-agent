@@ -14,7 +14,7 @@ import json
 import anthropic
 
 from network_opt.data import NetworkData
-from network_opt.model import SolveResult
+from network_opt.model import SolveResult, same_solution
 
 MODEL = "claude-opus-5-5"
 BOTTLENECK = 0.99  # utilizacion a partir de la cual un nodo es cuello de botella
@@ -41,7 +41,9 @@ Reglas:
   usa costo por unidad servida y nivel de servicio para juzgarlo.
 - La "penalizacion" es un costo ficticio del modelo para la demanda no servida;
   explicala como ventas perdidas o quiebres de stock, no como un gasto real.
-- Si hubo supuestos o partes no modelables de la pregunta, mencionalos."""
+- Si hubo supuestos o partes no modelables de la pregunta, mencionalos.
+- Si `sin_efecto` es true, dilo al inicio: el escenario no cambia la solucion
+  (explica por que, p.ej. la restriccion ya se cumplia en el caso base)."""
 
 
 class ReportError(RuntimeError):
@@ -97,6 +99,7 @@ def compare(
         return sorted(n for n, u in util.items() if u >= BOTTLENECK)
 
     return {
+        "sin_efecto": same_solution(base, scen),
         "kpis_base": kb,
         "kpis_escenario": ks,
         "variacion": deltas,

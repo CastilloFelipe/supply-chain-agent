@@ -198,3 +198,22 @@ def _extract(m: gp.Model, v: ModelVars, data: NetworkData) -> SolveResult:
             d: util(d, a["capacity"], outgoing=False) for d, a in data.depots.items()
         },
     )
+
+
+def same_solution(a: SolveResult, b: SolveResult, tol: float = 1e-6) -> bool:
+    """True si dos soluciones son identicas en costo, CDs abiertos, flujos y quiebres.
+
+    Sirve para avisar que un escenario no tiene efecto (p.ej. "maximo 3 CDs"
+    cuando el caso base ya opera con 3).
+    """
+    if a.total_cost is None or b.total_cost is None:
+        return False
+    if abs(a.total_cost - b.total_cost) > tol * max(1.0, abs(a.total_cost)):
+        return False
+    if set(a.open_depots) != set(b.open_depots):
+        return False
+    keys = set(a.flows) | set(b.flows) | set(a.unmet_demand) | set(b.unmet_demand)
+    return all(
+        abs(a.flows.get(k, 0) - b.flows.get(k, 0)) <= tol and abs(a.unmet_demand.get(k, 0) - b.unmet_demand.get(k, 0)) <= tol
+        for k in keys
+    )

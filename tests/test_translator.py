@@ -115,3 +115,11 @@ def test_structural_rules_translate(data):
         {"op": "scale_depot_fixed_cost", "factor": 1.1, "depot": None},
         {"op": "force_open_depot", "depot": "CD Santiago"},
     ]
+
+
+def test_system_prompt_includes_base_solution(data):
+    client = FakeClient(response(tool_use("1", "finish_scenario", **FINISH)))
+    s = translate("¿Qué CD conviene cerrar?", data, client=client)
+    assert s.operations == []
+    system = client.calls[0]["system"][0]["text"]
+    assert "Solucion actual del caso base" in system and "CDs operando (3 de 4)" in system

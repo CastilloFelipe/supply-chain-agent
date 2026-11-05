@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 import anthropic
 
 from network_opt.data import NetworkData
+from network_opt.model import SolveResult
 from network_opt.scenario import apply_operations
 
 from .tools import FINISH_TOOL, build_tools, tool_call_to_operation
@@ -38,6 +39,15 @@ Reglas:
   y un CD en Santiago), elige la lectura mas razonable y registrala en assumptions.
 - Si algo no se puede expresar con las herramientas, no lo aproximes: explicalo
   en `unsupported`.
+- Si la pregunta pide una DECISION que el optimizador ya toma (que CD cerrar,
+  cual conviene abrir, como repartir los flujos), no agregues cambios: la
+  solucion del caso base ya es la respuesta. Llama solo a finish_scenario y
+  explicalo en `interpretation`.
+- Si la pregunta combina un cambio con un RESULTADO deseado ("cerrar X pero
+  atender a todos"), modela el cambio y declara en `unsupported` que el resultado
+  no se puede imponer: la simulacion mostrara si se cumple.
+- Usa la solucion actual (abajo) para no proponer cambios sin efecto, p.ej. un
+  maximo de CDs igual o mayor a los que ya operan.
 - Termina siempre con finish_scenario."""
 
 
@@ -68,17 +78,42 @@ def describe_network(data: NetworkData) -> str:
     return "\n".join(lines)
 
 
+def describe_base_solution(data: NetworkData, base: SolveResult) -> str:
+    """Resumen de la solucion optima actual, para que el traductor sepa que ya ocurre."""
+    closed = [d for d in data.depots if d not in base.open_depots]
+    util = {**base.factory_utilization, **base.depot_utilization}
+    lines = [
+        "Solucion actual del caso base (ya optimizada):",
+        f"- CDs operando ({len(base.open_depots)} de {len(data.depots)}): {', '.join(base.open_depots) or 'ninguno'}",
+        f"- CDs cerrados por decision del optimizador: {', '.join(closed) or 'ninguno'}",
+        "- Utilizacion: " + ", ".join(f"{n} {u:.0%}" for n, u in util.items()),
+    ]
+    if base.unmet_demand:
+        lines.append("- Demanda no servida: " + ", ".join(f"{c} {q:.1f}" for c, q in base.unmet_demand.items()))
+    return "\n".join(lines)
+
+
+def translator_context(data: NetworkData, base: SolveResult | None = None) -> str:
+    """Todo lo que el traductor necesita saber de la red (system prompt, cacheable)."""
+    if base is None:
+        from network_opt import solve
+
+        base = solve(data)
+    return f"{describe_network(data)}\n\n{describe_base_solution(data, base)}"
+
+
 def translate(
     question: str,
     data: NetworkData,
     client: anthropic.Anthropic | None = None,
     model: str = MODEL,
+    base: SolveResult | None = None,
 ) -> TranslatedScenario:
     client = client or anthropic.Anthropic()
     tools = build_tools(data)
     system = [{
         "type": "text",
-        "text": f"{SYSTEM_PROMPT}\n\n{describe_network(data)}",
+        "text": f"{SYSTEM_PROMPT}\n\n{translator_context(data, base)}",
         "cache_control": {"type": "ephemeral"},
     }]
     messages: list[dict] = [{"role": "user", "content": question}]

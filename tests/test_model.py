@@ -122,3 +122,14 @@ def test_contradictory_rules_are_rejected(base_data):
             {"op": "force_open_depot", "depot": "CD Temuco"},
             {"op": "set_max_open_depots", "n": 1},
         ])
+
+
+def test_no_effect_scenario_is_detected(base_data):
+    from network_opt.model import same_solution
+
+    base = solve(base_data)
+    n_open = len(base.open_depots)
+    same = solve(apply_operations(base_data, [{"op": "set_max_open_depots", "n": n_open}]))
+    assert same_solution(base, same)
+    different = solve(apply_operations(base_data, [{"op": "set_max_open_depots", "n": n_open - 1}]))
+    assert not same_solution(base, different)

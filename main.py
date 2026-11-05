@@ -3,7 +3,7 @@
 Uso:
     python main.py                           # caso base + escenario de ejemplo (sin LLM)
     python main.py --pregunta "..."          # traduce la pregunta con Claude (requiere ANTHROPIC_API_KEY)
-    python main.py --catalogo                # herramientas validas para esta red (para traducir sin API)
+    python main.py --catalogo                # reglas, red, solucion base y herramientas (para traducir sin API)
     python main.py --escenario esc.json      # escenario ya traducido (p.ej. por Claude Code, sin API)
     python main.py --verbose                 # muestra el log de Gurobi
 """
@@ -20,6 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from network_opt import SolveResult, load_network, solve  # noqa: E402
+from network_opt.model import same_solution  # noqa: E402
 from network_opt.scenario import apply_operations  # noqa: E402
 
 BASE_DATA = Path(__file__).parent / "data" / "base_network.json"
@@ -50,6 +51,8 @@ def print_result(title: str, r: SolveResult) -> None:
 
 
 def print_delta(base: SolveResult, scen: SolveResult) -> None:
+    if base.total_cost is not None and scen.total_cost is not None and same_solution(base, scen):
+        print("\n*** AVISO: el escenario no cambia la solucion del caso base. ***")
     # FUTURO: este diff (base vs escenario, en formato to_dict()) es el
     # input que recibira el LLM para redactar el reporte ejecutivo.
     if base.total_cost is None or scen.total_cost is None:
@@ -77,9 +80,9 @@ def main() -> None:
 
     base_data = load_network(args.datos)
     if args.catalogo:
-        from whatif_agent.offline import catalog
+        from whatif_agent.offline import context
 
-        print(json.dumps(catalog(base_data), ensure_ascii=False, indent=2))
+        print(json.dumps(context(base_data), ensure_ascii=False, indent=2))
         return
     base = solve(base_data, verbose=args.verbose)
     print_result("Caso base", base)

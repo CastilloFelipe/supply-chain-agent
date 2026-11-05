@@ -19,16 +19,16 @@ OR-Library (cap41, cap71, cap101, cap131), usa `--datos data/orlib/<nombre>.json
 python main.py --catalogo [--datos <red>]
 ```
 
-Esto imprime las herramientas válidas con sus `enum`. Solo puedes usar esas
-herramientas y esos valores. Sigue las mismas reglas que `SYSTEM_PROMPT` en
-`src/whatif_agent/translator.py`:
+Esto imprime exactamente el contexto que recibe el traductor con API:
 
-- Una llamada por cambio. Los factores son multiplicativos ("a la mitad" = 0.5,
-  "sube 20%" = 1.2).
-- `"*"` significa "todos" en los campos que lo permiten.
-- Si algo es ambiguo, elige la lectura más razonable y anótala en `assumptions`.
-- Si algo no se puede expresar con las herramientas, no lo aproximes: explícalo
-  en `unsupported`.
+- `reglas`: las reglas de traducción. Síguelas al pie de la letra.
+- `red_y_solucion_base`: la red y la solución óptima actual. Úsala para no proponer
+  cambios sin efecto y para reconocer decisiones que el optimizador ya toma.
+- `herramientas`: las únicas operaciones válidas, con sus `enum`. `"*"` significa
+  "todos" en los campos que lo permiten.
+
+Una pregunta puede necesitar cero llamadas (por ejemplo, "¿qué CD conviene cerrar?":
+la solución base ya lo responde).
 
 Escribe el escenario en `outputs/escenario_<tema>.json` (crea la carpeta con `mkdir -p outputs` si no existe):
 

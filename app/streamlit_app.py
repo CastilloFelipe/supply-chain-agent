@@ -154,6 +154,10 @@ metric(c3, "Nivel de servicio", "nivel_servicio", lambda v: f"{v:.1%}", inverse=
 metric(c4, f"Demanda no servida ({units['flow']})", "demanda_no_servida",
        lambda v: f"{v:,.1f}", absolute=True)
 
+if cmp["sin_efecto"] and run["ops"]:
+    st.warning("Este escenario no cambia la solución del caso base: las condiciones que impone "
+               "ya se cumplían (por ejemplo, un máximo de CDs igual a los que ya operan).")
+
 if ks["demanda_no_servida"] > 1e-6:
     st.error(f"⚠️ Quiebre de stock: {ks['demanda_no_servida']:,.1f} {units['flow']} sin atender "
              f"({1 - ks['nivel_servicio']:.1%} de la demanda). Un costo de transporte menor en este "

@@ -37,6 +37,17 @@ def catalog(data: NetworkData) -> list[dict]:
     ]
 
 
+def context(data: NetworkData) -> dict:
+    """Lo mismo que recibe el traductor con API: reglas, red, solucion base y herramientas."""
+    from .translator import SYSTEM_PROMPT, translator_context
+
+    return {
+        "reglas": SYSTEM_PROMPT,
+        "red_y_solucion_base": translator_context(data),
+        "herramientas": catalog(data),
+    }
+
+
 def validate_call(call: dict, schemas: dict[str, dict]) -> None:
     name, args = call.get("name"), call.get("input")
     if name not in schemas:

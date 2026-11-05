@@ -22,9 +22,8 @@ python main.py --catalogo --datos <datos>   # sin --datos: red de Chile
 ## 2. Traducir cada pregunta
 
 Para cada pregunta escribe `evals/predicciones/<corrida>/<id>.json` con el formato
-de `--escenario` (ver `.claude/skills/what-if/SKILL.md`, paso 2), usando solo las
-herramientas y valores del catálogo y las reglas del `SYSTEM_PROMPT` de
-`src/whatif_agent/translator.py`. Traduce cada pregunta de forma independiente y
+de `--escenario` (ver `.claude/skills/what-if/SKILL.md`, paso 2), siguiendo las `reglas`, el contexto `red_y_solucion_base` y solo las
+`herramientas` que imprime `--catalogo`. Traduce cada pregunta de forma independiente y
 no corrijas traducciones después de ver resultados.
 
 ## 3. Medir
